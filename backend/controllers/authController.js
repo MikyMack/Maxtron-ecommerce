@@ -6,6 +6,7 @@ const otpGenerator = require('otp-generator');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const bcrypt = require("bcryptjs");
+const sendOTP = require('../utils/nodemailer');
 
 
 exports.userLogin = async (req, res) => {
@@ -172,17 +173,18 @@ exports.userRegister = async (req, res) => {
         await user.save();
 
         // Send OTP
-        const emailSent = await sendEmail(email, otp);
+        const emailSent = await sendOTP(email, otp);
         if (!emailSent) {
             return res.render('userRegister', { title: 'Register page', error: 'Failed to send OTP!' });
         }
 
-        // Render OTP page
-        res.render('userOtp', { title: 'Otp page', email });  // Pass email to OTP page
+        res.render('userOtp', { title: 'Otp page', email }); // Pass email to OTP page
     } catch (error) {
+        console.error("Registration error:", error);
         res.render('userRegister', { title: 'Register page', error: error.message });
     }
 };
+
 
 exports.userLogout = (req, res) => {
     res.clearCookie('token', { httpOnly: true, secure: true });

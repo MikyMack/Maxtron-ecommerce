@@ -4,11 +4,10 @@ const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    mobile: { type: String, required: true, unique: true },
+    mobile: { type: String,required: true},
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
     blocked: { type: Boolean, default: false },
-
     otp: { type: String }, // Store OTP
     otpExpires: { type: Date } // OTP expiry time
 });
