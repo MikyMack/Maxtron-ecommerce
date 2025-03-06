@@ -2510,6 +2510,14 @@ img {
     float: none;
   }
 }
+.ser-btn {
+  background-color: black;
+  color: white;
+  width: 120px;
+  height: 40px;
+  border-radius: 20px;
+  margin-top: 2rem;
+}
 
 @media (max-width: 440px) {
   .wpo-site-header .navbar-header .navbar-brand img {
@@ -3572,7 +3580,7 @@ img {
   width: 100%;
   height: 100%;
   content: "";
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.5);
 }
 .wpo-hero-slider .swiper-pagination-bullet {
   width: 12px;
@@ -3662,7 +3670,7 @@ img {
   font-weight: 600;
   line-height: 150px;
   margin-bottom: 0;
- color: white;
+ color: rgb(219, 219, 219);
 }
 
 
@@ -7859,6 +7867,7 @@ img {
   background: #fff;
   padding: 40px;
   margin-bottom: 30px;
+  height: 90%;
 }
 @media (max-width: 1499px) {
   .service-card {
@@ -14654,7 +14663,7 @@ img {
                 11.1 wpo-service-section-s8
 --------------------------------------------------------------*/
 .wpo-service-section-s8 {
-  padding-top: 90px;
+  padding-top: 50px;
   padding-bottom: 90px;
 }
 @media (max-width: 1399px) {
@@ -25311,7 +25320,7 @@ font-size: 12px!important;
 .enquiry-btn {
   position: fixed;
   right: 0;
-  top: 50%;
+  top: 30%;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: right bottom;
   background-color: black;
@@ -25323,7 +25332,7 @@ font-size: 12px!important;
   letter-spacing: 2px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  z-index: 100;
 }
 
 /* Hover effects */
@@ -25714,4 +25723,48 @@ margin-top: -7px;
 }
     .abt-btn{
       background-color: black;
+    }
+
+    .dropdown-services {
+      position: relative;
+    }
+
+    .dropdown-services .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0; /* Ensures the dropdown takes full width */
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+      min-width: 350px;
+    }
+
+    .dropdown-services:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-services .dropdown-menu li {
+      padding: 12px 0px;
+    }
+
+    .dropdown-services .dropdown-menu li a {
+      color: black;
+      text-decoration: none;
+      display: block;
+      font-weight: 600;
+      font-size: 20px;
+      padding-left: 15px;
+    }
+
+    .dropdown-services .dropdown-menu li a:hover {
+      background-color: #000 !important;
+      color: white !important;
+    }
+
+    @media (max-width: 767px) {
+      .dropdown-services .dropdown-menu {
+        display: none !important;
+      }
     }

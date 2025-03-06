@@ -131,6 +131,150 @@ router.get('/services', async (req, res) => {
         res.status(500).render('services', { title: 'Services', user: null });
     }
 });
+router.get('/polyBagProduction', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+        res.render('polyBagProduction', { title: 'Services', user });
+    } catch (error) {
+        res.status(500).render('polyBagProduction', { title: 'Services', user: null });
+    }
+});
+router.get('/consumablesSupplies', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+        res.render('consumablesSupplies', { title: 'Services', user });
+    } catch (error) {
+        res.status(500).render('consumablesSupplies', { title: 'Services', user: null });
+    }
+});
+router.get('/bioWasteHandling', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+        res.render('bioWasteHandling', { title: 'Services', user });
+    } catch (error) {
+        res.status(500).render('bioWasteHandling', { title: 'Services', user: null });
+    }
+});
+router.get('/transportation', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+        res.render('transportation', { title: 'Services', user });
+    } catch (error) {
+        res.status(500).render('transportation', { title: 'Services', user: null });
+    }
+});
+router.get('/biomining', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+        res.render('biomining', { title: 'Services', user });
+    } catch (error) {
+        res.status(500).render('biomining', { title: 'Services', user: null });
+    }
+});
+router.get('/wasteManagement', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+        res.render('wasteManagement', { title: 'Services', user });
+    } catch (error) {
+        res.status(500).render('wasteManagement', { title: 'Services', user: null });
+    }
+});
+router.get('/medicalWasteCollection', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+        res.render('medicalWasteCollection', { title: 'Services', user });
+    } catch (error) {
+        res.status(500).render('medicalWasteCollection', { title: 'Services', user: null });
+    }
+});
+router.get('/recyclableWaste', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+
+                user = await User.findById(decoded.id);
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+        res.render('recyclableWaste', { title: 'Services', user });
+    } catch (error) {
+        res.status(500).render('recyclableWaste', { title: 'Services', user: null });
+    }
+});
 router.get('/blogs', async (req, res) => {
     try {
         const token = req.cookies.token;
