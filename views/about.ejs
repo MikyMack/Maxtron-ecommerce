@@ -186,14 +186,14 @@
 
 
         <!--===== start wpo-about-section =====-->
-        <section class="wpo-about-section-s2 section-padding">
-            <div class="about-wrap">
+        <section id="about" class="wpo-about-section-s2 section-padding">
+            <div class="about-wrap d-flex flex-wrap-reverse">
                 <div class="image-1 fade_bottom">
                     <img src="/images/about/about-1/abt-banner-2.jpg" alt="">
                 </div>
                 <div class="content">
                     <h2 class="poort-text poort-in-right">About Maxtron Associates</h2>
-                    <div class="content-left abt-dis">
+                    <div class="content-left">
                         <p class="fade_bottom">Established in 2017, Maxtron Associates started as a transportation service provider to one of the leading operators of Common Biomedical Waste Disposal and Treatment Facilities of Kerala. We took responsibility sharing with the parent company, when bio medical waste management in Kerala was a challenge.  Be it individual homes or apartments, healthcare, government, transportation, commercial, institutional and industrial sectors; you can depend on MAXTRON ASSOCIATES for customized waste management related supplies that deliver bottom-line results.
                             
                            
@@ -218,9 +218,7 @@
                     </div>
 
                 </div>
-                <div class="image-2 fade_bottom">
-                    <img src="/images/about/about-2/2.jpg" alt="">
-                </div>
+          
             </div>
         </section>
 
@@ -229,7 +227,7 @@
             <div class="container-fluid p-0">
                 <div class="service-top">
                     <div class="image">
-                        <img src="/images/service/service-bg.jpg" alt="service-bg">
+                        <img src="/images/service/servicebg.jpg" alt="service-bg">
                     </div>
                     <div class="content">
                         <h2 class="poort-text poort-in-right"> Innovative Waste Management Solutions</h2>
@@ -548,6 +546,17 @@
       </div>
       <span class="mb_navbar_label">Shop</span>
     </a>
+        <a href="/cart" class="mb_navbar_item">
+      <div class="mb_navbar_icon_wrapper">
+        <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+     
+      </div>
+      <span class="mb_navbar_label">Cart</span>
+    </a>
     
     <% if (user) { %>
         <a href="/user-logout" class="mb_navbar_item">
@@ -571,17 +580,7 @@
             </a>
             <% } %>
     
-    <a href="/cart" class="mb_navbar_item">
-      <div class="mb_navbar_icon_wrapper">
-        <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <circle cx="9" cy="21" r="1"></circle>
-          <circle cx="20" cy="21" r="1"></circle>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-        </svg>
-     
-      </div>
-      <span class="mb_navbar_label">Cart</span>
-    </a>
+
   </nav>
   <script>
     document.addEventListener("DOMContentLoaded", function () {

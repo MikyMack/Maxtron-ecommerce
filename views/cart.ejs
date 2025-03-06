@@ -526,51 +526,64 @@
 
     <!-- Mobile Bottom Navbar -->
     <nav class="mb_navbar_container">
-        <a href="index.html" class="mb_navbar_item ">
-            <div class="mb_navbar_icon_wrapper">
-                <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
-            </div>
-            <span class="mb_navbar_label">Home</span>
+        <a href="/" class="mb_navbar_item ">
+          <div class="mb_navbar_icon_wrapper">
+            <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <span class="mb_navbar_label">Home</span>
         </a>
-
-        <a href="shop.html" class="mb_navbar_item">
-            <div class="mb_navbar_icon_wrapper">
-                <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <rect x="2" y="3" width="20" height="18" rx="2" ry="2"></rect>
-                    <line x1="2" y1="8" x2="22" y2="8"></line>
-                    <line x1="12" y1="8" x2="12" y2="21"></line>
-                    <line x1="7" y1="14.5" x2="7" y2="14.51"></line>
-                    <line x1="17" y1="14.5" x2="17" y2="14.51"></line>
-                </svg>
-            </div>
-            <span class="mb_navbar_label">Shop</span>
+        
+        <a href="/shop" class="mb_navbar_item">
+          <div class="mb_navbar_icon_wrapper">
+            <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <rect x="2" y="3" width="20" height="18" rx="2" ry="2"></rect>
+              <line x1="2" y1="8" x2="22" y2="8"></line>
+              <line x1="12" y1="8" x2="12" y2="21"></line>
+              <line x1="7" y1="14.5" x2="7" y2="14.51"></line>
+              <line x1="17" y1="14.5" x2="17" y2="14.51"></line>
+            </svg>
+          </div>
+          <span class="mb_navbar_label">Shop</span>
         </a>
-
-        <a href="login.html" class="mb_navbar_item">
+        <a href="/cart" class="mb_navbar_item">
             <div class="mb_navbar_icon_wrapper">
-                <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-            </div>
-            <span class="mb_navbar_label">Profile</span>
-        </a>
-
-        <a href="cart.html" class="mb_navbar_item mb_navbar_active">
-            <div class="mb_navbar_icon_wrapper">
-                <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
-                <span class="mb_navbar_cart_count">3</span>
+              <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+             
             </div>
             <span class="mb_navbar_label">Cart</span>
-        </a>
-    </nav>
+          </a>
+        
+        <% if (user) { %>
+            <a href="/user-logout" class="mb_navbar_item">
+                <div class="mb_navbar_icon_wrapper">
+                    <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <span class="mb_navbar_label">Logout</span>
+            </a>
+            <% } else { %>
+                <a href="/user-login" class="mb_navbar_item">
+                    <div class="mb_navbar_icon_wrapper">
+                        <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <span class="mb_navbar_label">Login</span>
+                </a>
+                <% } %>
+        
+    
+      </nav>
     <!--===== end page-wrapper =====-->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
