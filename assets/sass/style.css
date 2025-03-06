@@ -3671,24 +3671,10 @@ img {
   font-weight: 600;
   line-height: 150px;
   margin-bottom: 0;
-  background: linear-gradient(90deg, #ffffff, #996d6a);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientAnimation 3s ease-in-out infinite;
+ color: white;
 }
 
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+
 @media (max-width: 1199px) {
   .wpo-hero-slider .slide-content h2 {
     font-size: 90px;
