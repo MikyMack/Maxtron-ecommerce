@@ -7,6 +7,8 @@ const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const authenticateUser = require('./middleware/auth');
+const User = require('./models/User');
+const jwt = require('jsonwebtoken');
 // const nodemailer = require("nodemailer");
 // Import Routes
 const publicRoutes = require('./routes/publicRoutes');
@@ -50,7 +52,18 @@ app.use('/', orderRoutes);
 
 // Error Handling for 404
 app.use(async (req, res) => {
-    res.status(404).render('errorPage', { title: 'Page Not Found' });
+    const token = req.cookies.token;
+    let user = null;
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+            user = await User.findById(decoded.id);
+        } catch (err) {
+            console.error("JWT Verification Error:", err);
+            user = null; 
+        }
+    }
+    res.status(404).render('errorPage', { title: 'Page Not Found', user });
 });
 
 
