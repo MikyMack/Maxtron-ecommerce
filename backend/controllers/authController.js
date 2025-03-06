@@ -171,7 +171,7 @@ exports.userRegister = async (req, res) => {
 
         user = new User({ name, email, mobile, password, otp, otpExpires: Date.now() + 300000 });
         await user.save();
-
+        console.log(otp,"otpGenerator")
         // Send OTP
         const emailSent = await sendOTP(email, otp);
         if (!emailSent) {
