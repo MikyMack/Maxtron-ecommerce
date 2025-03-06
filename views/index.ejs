@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="wpOceans">
-    <link rel="shortcut icon" type="image/png" href="/images/max-logo.png">
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
     <title>Maxtron Associates</title>
     <link href="/css/themify-icons.css" rel="stylesheet">
     <link href="/css/flaticon.css" rel="stylesheet">
@@ -47,6 +47,7 @@
         <div class="cursor2"></div>
 
         <!--===== Start header =====-->
+      
         <header id="header">
             <div class="topbar">
                 <div class="container-fluid">
@@ -97,11 +98,11 @@
                                     <button class="menu-close"><i class="ti-close"></i></button>
                                     <ul class="nav navbar-nav mb-2 mb-lg-0">
                                         <li class=" image-style-item">
-                                            <a style="color: #a1817b;"  href="/">Home</a>
+                                            <a style="color: #a1817b;" href="/">Home</a>
                                          
                                         </li>
                                         <li class="">
-                                            <a href="/shop">Shop</a>
+                                            <a  href="/shop">Shop</a>
                                         
                                         </li>
                                         <li class="">
@@ -211,12 +212,8 @@
             </a>
         </section>
 
-
-
-      
-
         <!--===== start wpo-about-section =====-->
-        <section id="about" class="wpo-about-section-s2 section-padding">
+        <section class="wpo-about-section-s2 section-padding">
             <div class="about-wrap d-flex flex-wrap-reverse">
                 <div class="image-1 fade_bottom">
                     <img src="/images/about/about-1/abt-banner-2.jpg" alt="">
@@ -251,7 +248,6 @@
           
             </div>
         </section>
-    
         <section class="product-section">
             <div class="container">
                 <h2 class="section-title">Our Products</h2>
@@ -267,13 +263,13 @@
                                 <% } %>
                             </div>
                             <div class="product-info">
-                                <h3 class="product-title pr-title">
-                                    <a href="/product-details/<%= product._id %>"><%= product.title %></a>
+                                <h3 class="product-title">
+                                    <a style="color: black;" href="/product-details/<%= product._id %>"><%= product.title %></a>
                                 </h3>
                                 <div class="product-details">
                                     <div class="measurement">
                                         <label for="measurement-<%= product._id %>">Select Size:</label>
-                                        <select id="measurement-<%= product._id %>" class="measurement-select slct-sec"
+                                        <select style="border: 1px solid #dfdfdf ;" id="measurement-<%= product._id %>" class="measurement-select"
                                             data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>
                                             <% product.measurements.forEach((measurement, index) => { %>
                                                 <option value="<%= index %>">
@@ -299,9 +295,9 @@
                                 </div>
                                 <div class="product-actions">
                                     <div class="quantity-selector">
-                                        <button class="qty-btn dec qt-btn" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> - </button>
+                                        <button style="background-color: black; color: white;" class="qty-btn dec" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> - </button>
                                         <input type="text" class="quantityCount" value="1" id="qty-<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>
-                                        <button class="qty-btn inc qt-btn" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> + </button>
+                                        <button style="background-color: black; color: white;" class="qty-btn inc" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> + </button>
                                     </div>
                                     <a href="#" class="add-to-cart" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>Add to Cart</a>
                                 </div>
@@ -513,20 +509,11 @@
                                     <h3>Contact</h3>
                                 </div>
                                 <ul>
-                                    <li class="ft-icons"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M4 4h16v16H4z"></path>
-                                        <polyline points="4,8 12,14 20,8"></polyline>
-                                      </svg></span>maxtronassociateskerala@gmail.com</li>
-                                    <li class="ft-icons"><span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.78 19.78 0 0 1-8.63-3.11 19.78 19.78 0 0 1-7.08-7.08A19.78 19.78 0 0 1 2 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72 13.5 13.5 0 0 0 1.15 4.92 2 2 0 0 1-.45 2.11L8.5 12.5a16 16 0 0 0 7 7l2.79-2.79a2 2 0 0 1 2.11-.45 13.5 13.5 0 0 0 4.92 1.15A2 2 0 0 1 22 16.92z"></path>
-                                      </svg>
-                                      </span>+91 9745147000</li>
-                                    <li class="ft-icons"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13s-7-8-7-13a7 7 0 0 1 7-7z"></path>
-                                        <circle cx="12" cy="9" r="2.5"></circle>
-                                      </svg></span>Maxtron Associates </li>
-                                    <li class="ft-icons"> Chandranagar, Palakkad ,kerala,</li>
-                                       <li>678007</li>
+                                    <li>maxtronassociateskerala@gmail.com</li>
+                                    <li>+91 9745147000</li>
+                                    <li>MAXTRON ASSOCiATES </li>
+                                    <li> Chandranagar, Palakkad ,kerala,</li>
+                                    <li>678007</li>
                                 </ul>
                             </div>
                         </div>
@@ -630,6 +617,7 @@
             </div>
             <span class="mb_navbar_label">Shop</span>
         </a>
+        
         <a href="/cart" class="mb_navbar_item">
             <div class="mb_navbar_icon_wrapper">
                 <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -664,7 +652,6 @@
                 </a>
                 <% } %>
 
-             
     </nav>
 
     <!--===== end page-wrapper =====-->

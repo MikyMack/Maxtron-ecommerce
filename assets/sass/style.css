@@ -25716,15 +25716,7 @@ margin-top: -7px;
       color: white;
     }
     @media (max-width: 480px) {
-      .otp_main_container {
-          padding: 30px 20px;
-      }
-      
-      .otp_digit_field {
-          width: 55px;
-          height: 60px;
-          font-size: 24px;
-      }
+  
       .ft-icons{
         font-size: 15px!important;}
 }
