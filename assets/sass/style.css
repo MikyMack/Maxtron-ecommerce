@@ -25664,6 +25664,18 @@ margin-top: -7px;
       .price span {
         font-size: 18px;
       }
+      .navbar-brand img{
+        height:40px!important;
+        margin: auto!important;
+        
+      }
+  
+.navlogo1 {
+  display: flex;
+  justify-content: space-between;
+}
+.ft-icons{
+  font-size: 17px!important;}
     }
 
 
@@ -25688,4 +25700,26 @@ margin-top: -7px;
       text-transform: uppercase;
     }
 
-    
+    .pre-logo{
+      height: 70px;
+  
+    }
+    .pr-title a{
+      color: black!important;
+    }
+    .slct-sec{
+      border: 1px solid #d9d9d9;
+      font-size: 13px!important;
+    }
+    .qt-btn{
+      background-color: black;
+      color: white;
+    }
+    @media (max-width: 480px) {
+  
+      .ft-icons{
+        font-size: 15px!important;}
+}
+    .abt-btn{
+      background-color: black;
+    }
