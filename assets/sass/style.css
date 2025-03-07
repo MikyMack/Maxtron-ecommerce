@@ -25768,3 +25768,31 @@ margin-top: -7px;
         display: none !important;
       }
     }
+    .ser-dtl img{
+      height: 500px!important;
+      object-fit: cover;
+    }
+    .serdtls-img img{
+      height: 600px!important;
+      object-fit: cover;
+    }
+    .quantity-order{
+       background-color: #f2f3f4;
+       border-radius: 20px;
+    }
+    @media(min-width:1200px){
+      .navbar-nav li a{
+        font-size: 1.2vw!important;
+      }
+    }
+    @media (min-width: 980px) and (max-width: 1200px) {
+      .navbar-nav li a {
+        font-size: 1.3vw !important;
+      }
+    }
+    .mobail-menu button{
+      background-color: white;
+    }
+    .mobail-menu button span{
+      background-color: black!important;
+    }

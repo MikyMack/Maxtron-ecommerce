@@ -94,11 +94,7 @@
                                          
                                         </li>
                                         <li class="">
-                                            <a href="/about">About Us</a>
-                                       
-                                        </li>
-                                        <li class="">
-                                            <a href="/shop">Shop</a>
+                                            <a style="color: #a1817b;" href="/shop">Shop</a>
                                         
                                         </li>
                                         <li class="dropdown-services">
@@ -114,11 +110,15 @@
                                                 <li><a href="/recyclableWaste">Recyclable Waste Solutions</a></li>
                                             </ul>
                                         </li>
-                                 
+                                        <li class="">
+                                            <a href="/about">About Us</a>
+                                       
+                                        </li>
                                         <li class="">
                                             <a href="/blogs">Blogs</a>
                                        
                                         </li>
+              
                                     </ul>
                                 </div>
                             </div>
@@ -134,59 +134,35 @@
                                     <div class="header-user-wrapper">
                                         <div class="cart-user-contact">
                                             <button class="user-toggle-btn">
-                                                <img src="/images/user.svg" alt="">
+                                                <% if (user) { %>
+                                                    <img style="width: 20px;" src="/images/logged.svg" alt="">
+                                                <% } else { %>
+                                                    <img  src="/images/user.svg" alt="">
+                                                <% } %>
                                             </button>
                                             <div class="header-user-form">
                                                 <ul>
-                                                    <li><a href="login.html">login</a></li>
-                                                    <li><a href="register.html">Register</a></li>
-                                                 
+                                                    <% if (user) { %>
+                                                        <li><a href="#" id="logout-btn">Logout</a></li>
+                                                        <li><a href="/contact">Orders</a></li>
+                                                        <li><a href="/contact">Contact Us</a></li>
+                                                    <% } else { %>
+                                                        <li><a href="/user-login">Login</a></li>
+                                                        <li><a href="/user-register">Register</a></li>
+                                                        <li><a href="/contact">Contact Us</a></li>
+                                                    <% } %>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 
-                                    <div class="mini-cart">
-                                        <button class="cart-toggle-btn"> <img src="/images/shopping-cart.svg"
-                                                alt=""> <span class="cart-count">2</span></button>
-                                        <div class="mini-cart-content">
-                                            <button class="mini-cart-close"><i class="ti-close"></i></button>
-                                            <div class="mini-cart-items">
-                                                <div class="mini-cart-item clearfix">
-                                                    <div class="mini-cart-item-image">
-                                                        <a href="/shop"><img
-                                                                src="/images/products/product-1.jpeg" alt></a>
-                                                    </div>
-                                                    <div class="mini-cart-item-des">
-                                                        <a href="/shop">Black Garbage bag</a>
-                                                        <span class="mini-cart-item-price">₹250.00 x 1</span>
-                                                        <span class="mini-cart-item-quantity"><a href="#"><i
-                                                                    class="ti-close"></i></a></span>
-                                                    </div>
-                                                </div>
-                                                <div class="mini-cart-item clearfix">
-                                                    <div class="mini-cart-item-image">
-                                                        <a href="/shop"><img
-                                                                src="/images/products/product-2.jpeg" alt></a>
-                                                    </div>
-                                                    <div class="mini-cart-item-des">
-                                                        <a href="/shop">White Garbage bag</a>
-                                                        <span class="mini-cart-item-price">₹250.00 x 1</span>
-                                                        <span class="mini-cart-item-quantity"><a href="#"><i
-                                                                    class="ti-close"></i></a></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mini-cart-action clearfix">
-                                                <span class="mini-checkout-price">Subtotal:
-                                                    <span>₹ 500.00</span></span>
-                                                <div class="mini-btn">
-                                                    <a href="checkout.html" class="view-cart-btn s1">Checkout</a>
-                                                    <a href="/cart" class="view-cart-btn">View Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <li class="shopping-cart-wrapper">
+                                        <a href="/cart">
+                                            <button class="shopping-cart-btn" aria-label="View shopping cart">
+                                                <img src="/images/shopping-cart.svg" alt="Shopping Cart" class="cart-icon">
+                                            </button>
+                                        </a>
+                                    </li>
                                 </div>
                             </div>
                         </div>
