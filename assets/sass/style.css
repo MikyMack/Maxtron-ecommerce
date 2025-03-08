@@ -25780,7 +25780,7 @@ margin-top: -7px;
        background-color: #f2f3f4;
        border-radius: 20px;
     }
-    @media(min-width:1200px){
+    @media(min-width:1198px){
       .navbar-nav li a{
         font-size: 1.2vw!important;
       }
@@ -25791,8 +25791,29 @@ margin-top: -7px;
       }
     }
     .mobail-menu button{
-      background-color: white;
+      background-color: white!important;
     }
     .mobail-menu button span{
       background-color: black!important;
     }
+    .blog-img{
+      
+    }
+.blog-img img{
+  height: 500px!important;
+  object-fit: cover;
+
+
+}
+.abt-img img{
+  height: 700px!important;
+}
+.abt-text{
+  font-size: 105px!important;
+  line-height: normal!important;
+}
+@media(max-width:600px){
+  .abt-text{
+    font-size: 45px!important;
+  }
+}
