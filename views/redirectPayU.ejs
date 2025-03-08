@@ -1,0 +1,9 @@
+<form action="<%= payuUrl %>" method="POST" id="payuForm">
+    <% for (let key in payuData) { %>
+        <input type="hidden" name="<%= key %>" value="<%= payuData[key] %>">
+    <% } %>
+</form>
+
+<script>
+    document.getElementById("payuForm").submit();
+</script>

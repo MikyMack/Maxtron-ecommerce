@@ -16,6 +16,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const authRoutes = require('./routes/authRoutes');
 const apiRoutes = require('./routes/apiRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 const app = express();
 
 // Middleware
@@ -47,6 +48,7 @@ app.use('/', adminRoutes);
 app.use('/api/auth', authRoutes); 
 app.use('/', apiRoutes); 
 app.use('/', orderRoutes); 
+app.use('/', paymentRoutes); 
 
 
 

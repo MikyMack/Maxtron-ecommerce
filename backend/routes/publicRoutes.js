@@ -4,6 +4,7 @@ const Category = require('../models/Category');
 const Product = require('../models/Product');
 const User = require('../models/User');
 const Blog = require('../models/Blog');
+const Cart = require('../models/Cart');
 const Testimonial = require('../models/Testimonial');
 const jwt = require('jsonwebtoken');
 
@@ -340,6 +341,46 @@ router.get('/contact', async (req, res) => {
         res.render('contact', { title: 'Contact Us', user });
     } catch (error) {
         res.status(500).render('contact', { title: 'Contact Us', user: null });
+    }
+});
+router.get('/checkout', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        let cart = null;
+        let cartItems = [];
+        let totalAmount = 0;
+
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+                user = await User.findById(decoded.id);
+
+                if (user) {
+                    // Fetch the cart of the logged-in user
+                    cart = await Cart.findOne({ userId: user._id }).populate('items.productId');
+
+                    if (cart) {
+                        cartItems = cart.items;
+                        totalAmount = cartItems.reduce((total, item) => {
+                            return total + (item.selectedMeasurement.offerPrice || item.selectedMeasurement.price) * item.quantity;
+                        }, 0);
+                    }
+                }
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+
+        res.render('checkout', { 
+            title: 'Checkout Page', 
+            user, 
+            cartItems, 
+            totalAmount 
+        });
+    } catch (error) {
+        console.error("Checkout Page Error:", error);
+        res.status(500).render('user-login', { title: 'Login' });
     }
 });
 // router.get('/return-policy&shipping', async (req, res) => {
