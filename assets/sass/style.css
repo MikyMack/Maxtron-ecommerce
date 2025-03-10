@@ -26441,3 +26441,42 @@ margin-bottom: 5px;
       display: none;
   }
 }
+.time-date-display {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  z-index: 10;
+  width: 90%;
+  max-width: 300px;
+}
+
+#time {
+  font-size: 6vw;
+  font-weight: bold;
+}
+
+#date {
+  font-size: 4vw;
+  opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  #time {
+    font-size: 24px;
+  }
+
+  #date {
+    font-size: 16px;
+  }
+}
