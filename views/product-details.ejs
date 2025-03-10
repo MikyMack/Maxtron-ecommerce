@@ -232,11 +232,14 @@
                                     </select>
                                 </div>
                                 <ul>
+                                    <li>Price: <span id="price-<%= product._id %>">
+                                            ₹<%= product.measurements[0].price %>
+                                        </span></li>
                                     <li>Length: <span id="length-<%= product._id %>">
-                                            <%= selectedMeasurement.length %>
+                                            <%= product.measurements[0].length %>
                                         </span> cm</li>
                                     <li>Width: <span id="width-<%= product._id %>">
-                                            <%= selectedMeasurement.width %>
+                                            <%= product.measurements[0].width %>
                                         </span> cm</li>
                                 </ul>
                             </div>
@@ -283,7 +286,7 @@
                             select.addEventListener('change', function () {
                                 const productId = this.dataset.productId;
                                 const selectedIndex = this.value;
-                                const product = <% - JSON.stringify(product) %>;
+                                const product = <%- JSON.stringify(product) %>;
                                 const selectedMeasurement = product.measurements[selectedIndex];
 
                                 const discount = selectedMeasurement.offerPrice ? Math.round(((selectedMeasurement.price - selectedMeasurement.offerPrice) / selectedMeasurement.price) * 100) : 0;
@@ -291,18 +294,21 @@
                                 const oldPriceElement = document.getElementById(`old-price-${productId}`);
                                 const currentPriceElement = document.getElementById(`current-price-${productId}`);
 
-                                if (discount > 0) {
-                                    discountElement.textContent = `${discount}% discount`;
-                                    oldPriceElement.textContent = `₹${selectedMeasurement.price}`;
-                                    currentPriceElement.textContent = `₹${selectedMeasurement.offerPrice}`;
-                                } else {
-                                    discountElement.textContent = '';
-                                    oldPriceElement.textContent = '';
-                                    currentPriceElement.textContent = `₹${selectedMeasurement.price}`;
+                                if (discountElement && oldPriceElement && currentPriceElement) {
+                                    if (discount > 0) {
+                                        discountElement.textContent = `${discount}% discount`;
+                                        oldPriceElement.textContent = `₹${selectedMeasurement.price}`;
+                                        currentPriceElement.textContent = `₹${selectedMeasurement.offerPrice}`;
+                                    } else {
+                                        discountElement.textContent = '';
+                                        oldPriceElement.textContent = '';
+                                        currentPriceElement.textContent = `₹${selectedMeasurement.price}`;
+                                    }
                                 }
 
                                 document.getElementById(`length-${productId}`).textContent = selectedMeasurement.length;
                                 document.getElementById(`width-${productId}`).textContent = selectedMeasurement.width;
+                                document.getElementById(`price-${productId}`).textContent = `₹${selectedMeasurement.price}`;
                                 document.getElementById(`stocks-${productId}`).textContent = selectedMeasurement.stocks;
                             });
                         });
@@ -316,7 +322,7 @@
                                 const quantity = parseInt(qtyInput.value);
                                 const selectElement = document.getElementById(`measurement-${productId}`);
                                 const selectedIndex = selectElement.value;
-                                const product = <% - JSON.stringify(product) %>;
+                                const product = <%- JSON.stringify(product) %>;
                                 const selectedMeasurement = product.measurements[selectedIndex];
 
                                 if (!selectedMeasurement) {
