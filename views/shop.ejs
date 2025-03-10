@@ -201,6 +201,7 @@
                                 <a href="/product-details/<%= product._id %>">
                                     <img src="<%= product.images[0] %>" alt="<%= product.title %>">
                                 </a>
+                                
                                 <% if (product.measurements.every(measurement => measurement.stocks === 0)) { %>
                                     <div class="sold-out-overlay">Sold Out</div>
                                 <% } %>
@@ -209,10 +210,34 @@
                                 <h3 class="product-title">
                                     <a style="color: black;" href="/product-details/<%= product._id %>"><%= product.title %></a>
                                 </h3>
-                                <div class="product-details">
+                                <div class="xanthic_provider_data">Seller: OEM</div>
+                                  <div class="d-flex p-0">
+                                    <div class="xanthic_quality_indicator">4.5 - 5.0 ★</div>
+                                    <span class="xanthic_verification_seal">VA ✓</span>
+                                  </div>      
+                                
+                                
+                                <div class="xanthic_provider_data">Brand: Unbranded--Hardeep Industries</div>
+                                
+                                <div class="xanthic_quantity_requisite">Min. Qty. Per Consignee: 5000</div>
+                                <div class="price">
+                                    <% const discount = product.measurements[0].offerPrice ?
+                                        Math.round(((product.measurements[0].price -
+                                        product.measurements[0].offerPrice) / product.measurements[0].price) * 100)
+                                        : 0; %>
+                                    <% if (discount > 0) { %>
+                                        <span class="discount"
+                                            style="color: rgb(77, 77, 77); font-size: small;">
+                                            <%= discount %>% discount
+                                        </span>
+                                    <% } %>
+                                    <del id="price-<%= product._id %>">₹<%= product.measurements[0].price %></del>
+                                    <span id="offerPrice-<%= product._id %>">₹<%= product.measurements[0].offerPrice || product.measurements[0].price %></span>
+                                </div>
+                                <div class="product-details d-flex justify-content-start align-items-start">
                                     <div class="measurement">
                                         <label for="measurement-<%= product._id %>">Select Size:</label>
-                                        <select id="measurement-<%= product._id %>" class="measurement-select"
+                                        <select style="border: 1px solid #dfdfdf ;" id="measurement-<%= product._id %>" class="measurement-select"
                                             data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>
                                             <% product.measurements.forEach((measurement, index) => { %>
                                                 <option value="<%= index %>">
@@ -221,26 +246,13 @@
                                             <% }) %>
                                         </select>
                                     </div>
-                                    <div class="price">
-                                        <% const discount = product.measurements[0].offerPrice ?
-                                            Math.round(((product.measurements[0].price -
-                                            product.measurements[0].offerPrice) / product.measurements[0].price) * 100)
-                                            : 0; %>
-                                        <% if (discount > 0) { %>
-                                            <span class="discount"
-                                                style="color: rgb(77, 77, 77); font-size: small;">
-                                                <%= discount %>% discount
-                                            </span>
-                                        <% } %>
-                                        <del id="price-<%= product._id %>">₹<%= product.measurements[0].price %></del>
-                                        <span id="offerPrice-<%= product._id %>">₹<%= product.measurements[0].offerPrice || product.measurements[0].price %></span>
-                                    </div>
+                                  
                                 </div>
                                 <div class="product-actions">
                                     <div class="quantity-selector">
-                                        <button class="qty-btn dec" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> - </button>
+                                        <button style="background-color: black; color: white;" class="qty-btn dec" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> - </button>
                                         <input type="text" class="quantityCount" value="1" id="qty-<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>
-                                        <button class="qty-btn inc" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> + </button>
+                                        <button style="background-color: black; color: white;" class="qty-btn inc" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> + </button>
                                     </div>
                                     <a href="#" class="add-to-cart" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>Add to Cart</a>
                                 </div>
