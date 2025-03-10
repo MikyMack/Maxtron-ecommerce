@@ -220,7 +220,7 @@
                                         <% if (discount> 0) { %>
                                             <span class="discount" id="discount-<%= product._id %>"
                                                 style="color: rgb(77, 77, 77); font-size: small;">
-                                                <%= discount %>% discount
+                                                <%= discount %>% OFF
                                             </span>
                                             <span class="old" id="old-price-<%= product._id %>">₹<%=
                                                     selectedMeasurement.price %></span>
@@ -254,9 +254,6 @@
                                     <li>Width: <span id="width-<%= product._id %>">
                                             <%= selectedMeasurement.width %>
                                         </span> cm</li>
-                                    <li>Stocks: <span id="stocks-<%= product._id %>">
-                                            <%= selectedMeasurement.stocks %>
-                                        </span></li>
                                 </ul>
                             </div>
                             <div class="product-option">
