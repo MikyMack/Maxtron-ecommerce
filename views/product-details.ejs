@@ -219,7 +219,7 @@
                             <p>
                                 <%= product.productDescription %>
                             </p>
-                            <div class="product-details">
+                            <div class="product-details d-flex justify-content-start align-items-start text-start p-0">
                                 <div class="measurement">
                                     <label for="measurement-<%= product._id %>">Select Size:</label>
                                     <select id="measurement-<%= product._id %>" class="measurement-select"
@@ -232,7 +232,7 @@
                                             <% }) %>
                                     </select>
                                 </div>
-                                <ul>
+                                <ul >
                                     <li>Price: <span id="price-<%= product._id %>">
                                             ₹<%= product.measurements[0].price %>
                                         </span></li>
