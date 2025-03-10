@@ -208,28 +208,12 @@
                     </div>
 
                     <div class="col col-lg-6 col-12">
-                        <div class="product-details">
-                            <h2>
-                                <%= product.title %>
-                            </h2>
-                            <div class="price">
-                                <% const selectedMeasurement=product.measurements[0]; %>
-                                    <% const discount=selectedMeasurement.offerPrice ?
-                                        Math.round(((selectedMeasurement.price - selectedMeasurement.offerPrice) /
-                                        selectedMeasurement.price) * 100) : 0; %>
-                                        <% if (discount> 0) { %>
-                                            <span class="discount" id="discount-<%= product._id %>"
-                                                style="color: rgb(77, 77, 77); font-size: small;">
-                                                <%= discount %>% OFF
-                                            </span>
-                                            <span class="old" id="old-price-<%= product._id %>">₹<%=
-                                                    selectedMeasurement.price %></span>
-                                            <span class="current" id="current-price-<%= product._id %>">₹<%=
-                                                    selectedMeasurement.offerPrice %></span>
-                                            <% } else { %>
-                                                <span class="current" id="current-price-<%= product._id %>">₹<%=
-                                                        selectedMeasurement.price %></span>
-                                                <% } %>
+                        <div class="product-detailss">
+                            <h2>Black Garbage bag</h2>
+                            <div class="prdct-details-info">
+                             
+                                <p>Minimum Order Quantity: <span>100 kilogram</span></p>
+                                <p>Delivary Time: <span class="det-values">7 Days</span></p>
                             </div>
                             <p>
                                 <%= product.productDescription %>
@@ -256,29 +240,27 @@
                                         </span> cm</li>
                                 </ul>
                             </div>
-                            <div class="product-option">
-                                <form class="form">
-                                    <div class="product-row">
-                                        <div class="quantity-container">
-                                            <span class="decrement qty-btn"
-                                                data-product-id="<%= product._id %>">-</span>
-                                            <input type="text" id="qty-<%= product._id %>" value="1">
-                                            <span class="increment qty-btn"
-                                                data-product-id="<%= product._id %>">+</span>
+
+                    
+                                <div class="product-option">
+                                    <form class="form">
+                                        <div class="product-row d-flex gap-2 mt-4">
+                                           <div class="quantity-container">
+                                               <span class="decrement">-</span>
+                                               <input type="text" id="quantity" value="1">
+                                               <span class="increment">+</span>
+                                           </div>
+                                            <div>
+                                                <button type="submit" class=" prd-det-btn">Add to cart</button>
+                                            </div>
+                                         
                                         </div>
-                                        <div>
-                                            <button type="submit" class="theme-btn add-to-cart"
-                                                data-product-id="<%= product._id %>">Add to cart</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> <!-- end option -->
-                            <div class="tg-btm">
-                                <p><span>Categories:</span>
-                                    <%= product.category %>
-                                </p>
-                                <p><span>Tags:</span> garbage, cover, bag</p>
-                            </div>
+                                    </form>
+                                </div> <!-- end option -->
+                                <div class="tg-btm mt-3">
+                                    <p><span>Categories:</span>Garbage Bag</p>
+                                    <p><span>Tags:</span> garbage, cover, bag</p>
+                                </div>
                         </div> <!-- end product details -->
                     </div> <!-- end col -->
                     <script>
@@ -480,8 +462,111 @@
                         </div>
                     </div>
                 </div> <!-- end row -->
+
+                <section class="mt-5">
+                    <div class="bio-prod-container">
+                        <p class="bio-heading-bar">Hospital Biomedical Wastage Bags Price And Quantity</p>
+                        <div class="bio-data-structure">
+                          <div class="bio-attribute-name">Minimum Order Quantity</div>
+                          <div class="bio-attribute-data">500 Kilograms</div>
+                          <div class="bio-attribute-name">Price</div>
+                          <div class="bio-attribute-data"><span class="bio-special-pill">100 INR/Kilograms</span></div>
+                        </div>
+                      </div>
+                      
+                      <div class="bio-prod-container">
+                        <p class="bio-heading-bar">Hospital Biomedical Wastage Bags Product Specifications</p>
+                        <div class="bio-data-structure">
+                          <div class="bio-attribute-name">Material</div>
+                          <div class="bio-attribute-data">Plastic</div>
+                          <div class="bio-attribute-name">Use</div>
+                          <div class="bio-attribute-data">Beverage</div>
+                          
+                          <div class="bio-attribute-name">Color</div>
+                          <div class="bio-attribute-data">All Color</div>
+                          <div class="bio-attribute-name">Size</div>
+                          <div class="bio-attribute-data">Different Sizes Available</div>
+                          
+                          <div class="bio-attribute-name">Handles</div>
+                          <div class="bio-attribute-data">Other</div>
+                        </div>
+                      </div>
+                      
+                      <div class="bio-prod-container">
+                        <p class="bio-heading-bar">Hospital Biomedical Wastage Bags Trade Information</p>
+                        <div class="bio-data-structure">
+                          <div class="bio-attribute-name">Supply Ability</div>
+                          <div class="bio-attribute-data">200 Kilograms Per Day</div>
+                          <div class="bio-attribute-name">Delivery Time</div>
+                          <div class="bio-attribute-data">2-4 Days</div>
+                        </div>
+                      </div>
+                      
+                      <div class="bio-prod-container">
+                        <p class="bio-heading-bar">Product Description</p>
+                        <div class="bio-extended-text">
+                          We specialize in providing Biomedical Waste Collection Bags that can be availed from us with/without Bio-hazard logo printing. These bags are manufactured from the highest grade raw material by following the quality guidelines specified by the industry. We manufacture different colors such as black, yellow, red & blue, and in different lengths to meet customers requirements. Our offered bags are widely used in hospitals, pharmaceutical industries, laboratories for collecting and disposing waste material and are available
+                          <br><br>
+                          Colours - red, blue,green, yellow black
+                        </div>
+                      </div>
+                </section>
+
+
+                <section class="wpo-contact-pg-section section-padding pt-0">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-lg-10 offset-lg-1">
+                           
+                                <div class="wpo-contact-title">
+                                    <h2>Have Any Question?</h2>
+                                    <p>We're here to help! Contact us for any inquiries, and our team will assist you promptly.</p>
+                                </div>
+                                <div class="wpo-contact-form-area">
+                                    <form method="post" class="contact-validation-active" id="consultancy-form">
+                                        <div>
+                                            <input type="text" class="form-control" name="name" id="name"
+                                                placeholder="Your Name*">
+                                        </div>
+                                        <div>
+                                            <input type="email" class="form-control" name="email" id="email"
+                                                placeholder="Your Email*">
+                                        </div>
+                                        <div>
+                                            <input type="text" class="form-control" name="adress" id="adress"
+                                                placeholder="Adress">
+                                        </div>
+                                        <div>
+                                            <input type="text" class="form-control" name="adress" id="adress"
+                                                placeholder="Subject">
+                                        </div>
+                                        <div class="fullwidth">
+                                            <textarea class="form-control" name="note" id="note"
+                                                placeholder="Message..."></textarea>
+                                        </div>
+                                        <div class="submit-area">
+                                            <button type="submit" class="theme-btn">Get in Touch</button>
+                                            <div id="loader">
+                                                <i class="ti-reload"></i>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix error-handling-messages">
+                                            <div id="success">Thank you</div>
+                                            <div id="error"> Error occurred while sending email. Please try again later. </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end container -->
+                </section>
+
+
+                
             </div> <!-- end of container -->
         </section>
+
+
 
 
         <!--===== start wpo-partners-section =====-->
