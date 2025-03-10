@@ -146,7 +146,7 @@
                                                 <ul>
                                                     <% if (user) { %>
                                                         <li><a href="#" id="logout-btn">Logout</a></li>
-                                                        <li><a href="/contact">Orders</a></li>
+                                                        <li><a href="/orders">Orders</a></li>
                                                         <li><a href="/contact">Contact Us</a></li>
                                                         <% } else { %>
                                                             <li><a href="/user-login">Login</a></li>
@@ -210,11 +210,22 @@
 
                     <div class="col col-lg-6 col-12">
                         <div class="product-detailss">
-                            <h2>Black Garbage bag</h2>
+                            
+                            <h2><%= product.title %></h2>
+                            <div class="price">
+                                <% const discount = product.measurements[0].offerPrice ? Math.round(((product.measurements[0].price - product.measurements[0].offerPrice) / product.measurements[0].price) * 100) : 0; %>
+                                <% if (discount > 0) { %>
+                                    <span class="discount" style="color: rgb(77, 77, 77); font-size: small;">
+                                        <%= discount %>% OFF
+                                    </span>
+                                <% } %>
+                                <del class="mt-2" id="old-price-<%= product._id %>">₹<%= product.measurements[0].price %></del>
+                                <span id="current-price-<%= product._id %>">₹<%= product.measurements[0].offerPrice || product.measurements[0].price %></span>
+                            </div>
                             <div class="prdct-details-info">
                              
-                                <p>Minimum Order Quantity: <span>100 kilogram</span></p>
-                                <p>Delivary Time: <span class="det-values">7 Days</span></p>
+                                <!-- <p>Minimum Order Quantity: <span>100 kilogram</span></p> -->
+                                <p>Delivery Time: <span class="det-values">7 Days</span></p>
                             </div>
                             <p>
                                 <%= product.productDescription %>
@@ -233,9 +244,7 @@
                                     </select>
                                 </div>
                                 <ul >
-                                    <li>Price: <span id="price-<%= product._id %>">
-                                            ₹<%= product.measurements[0].price %>
-                                        </span></li>
+                               
                                     <li>Length: <span id="length-<%= product._id %>">
                                             <%= product.measurements[0].length %>
                                         </span> cm</li>
@@ -248,16 +257,18 @@
                     
                                 <div class="product-option">
                                     <form class="form">
-                                        <div class="product-row d-flex gap-2 mt-4">
-                                           <div class="quantity-container">
-                                               <span class="decrement">-</span>
-                                               <input type="text" id="quantity" value="1">
-                                               <span class="increment">+</span>
-                                           </div>
-                                            <div>
-                                                <button type="submit" class=" prd-det-btn">Add to cart</button>
+                                        <div class="product-row d-flex flex-column gap-2 mt-4">
+                                            <div class="d-flex align-items-center">
+                                                <div class="quantity-container d-flex align-items-center">
+                                                    <span class="decrement qty-btn" data-product-id="<%= product._id %>">-</span>
+                                                    <input type="text" id="qty-<%= product._id %>" value="1" class="text-center">
+                                                    <span class="increment qty-btn" data-product-id="<%= product._id %>">+</span>
+                                                </div>
+                                                <button type="submit" class="add-to-cart prd-det-btn ms-3" data-product-id="<%= product._id %>">Add to cart</button>
                                             </div>
-                                         
+                                            <div>
+                                                <button type="button" class="call-now-btn" style="background-color: rgb(78, 105, 78); color: white;padding: 5px 10px;" onclick="window.location.href='tel:+919745147000'">Call Now for Product Enquiry</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div> <!-- end option -->
@@ -295,22 +306,31 @@
                                 const oldPriceElement = document.getElementById(`old-price-${productId}`);
                                 const currentPriceElement = document.getElementById(`current-price-${productId}`);
 
-                                if (discountElement && oldPriceElement && currentPriceElement) {
+                                if (oldPriceElement && currentPriceElement) {
                                     if (discount > 0) {
-                                        discountElement.textContent = `${discount}% discount`;
+                                        if (discountElement) {
+                                            discountElement.textContent = `${discount}% discount`;
+                                        }
                                         oldPriceElement.textContent = `₹${selectedMeasurement.price}`;
                                         currentPriceElement.textContent = `₹${selectedMeasurement.offerPrice}`;
                                     } else {
-                                        discountElement.textContent = '';
+                                        if (discountElement) {
+                                            discountElement.textContent = '';
+                                        }
                                         oldPriceElement.textContent = '';
                                         currentPriceElement.textContent = `₹${selectedMeasurement.price}`;
                                     }
                                 }
 
-                                document.getElementById(`length-${productId}`).textContent = selectedMeasurement.length;
-                                document.getElementById(`width-${productId}`).textContent = selectedMeasurement.width;
-                                document.getElementById(`price-${productId}`).textContent = `₹${selectedMeasurement.price}`;
-                                document.getElementById(`stocks-${productId}`).textContent = selectedMeasurement.stocks;
+                                const lengthElement = document.getElementById(`length-${productId}`);
+                                const widthElement = document.getElementById(`width-${productId}`);
+                                const priceElement = document.getElementById(`price-${productId}`);
+                                const stocksElement = document.getElementById(`stocks-${productId}`);
+
+                                if (lengthElement) lengthElement.textContent = selectedMeasurement.length;
+                                if (widthElement) widthElement.textContent = selectedMeasurement.width;
+                                if (priceElement) priceElement.textContent = `₹${selectedMeasurement.price}`;
+                                if (stocksElement) stocksElement.textContent = selectedMeasurement.stocks;
                             });
                         });
 
@@ -474,10 +494,10 @@
                     <div class="bio-prod-container">
                         <p class="bio-heading-bar">Hospital Biomedical Wastage Bags Price And Quantity</p>
                         <div class="bio-data-structure">
-                          <div class="bio-attribute-name">Minimum Order Quantity</div>
-                          <div class="bio-attribute-data">500 Kilograms</div>
+                          <div class="bio-attribute-name">Minimum Order Quantity For Additional discount</div>
+                          <div class="bio-attribute-data">100 bags</div>
                           <div class="bio-attribute-name">Price</div>
-                          <div class="bio-attribute-data"><span class="bio-special-pill">100 INR/Kilograms</span></div>
+                          <div class="bio-attribute-data"><span class="bio-special-pill">₹<%= product.measurements[0].offerPrice %></span></div>
                         </div>
                       </div>
                       
@@ -514,7 +534,7 @@
                         <div class="bio-extended-text">
                           We specialize in providing Biomedical Waste Collection Bags that can be availed from us with/without Bio-hazard logo printing. These bags are manufactured from the highest grade raw material by following the quality guidelines specified by the industry. We manufacture different colors such as black, yellow, red & blue, and in different lengths to meet customers requirements. Our offered bags are widely used in hospitals, pharmaceutical industries, laboratories for collecting and disposing waste material and are available
                           <br><br>
-                          Colours - red, blue,green, yellow black
+                          Colors - red, blue,white, yellow 
                         </div>
                       </div>
                 </section>
@@ -573,10 +593,6 @@
             </div> <!-- end of container -->
         </section>
 
-
-
-
-        <!--===== start wpo-partners-section =====-->
 
 
         <!--===== start wpo-site-footer-section =====-->

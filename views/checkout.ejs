@@ -21,6 +21,7 @@
     <link href="/css/jquery.fancybox.css" rel="stylesheet">
     <link href="/css/odometer-theme-default.css" rel="stylesheet">
     <link href="/sass/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -392,42 +393,68 @@
                                 address: formData.get('billingAddress[address]'),
                                 zipCode: formData.get('billingAddress[zipCode]')
                             },
+                            deliveryAddress: {
+                                fullName: formData.get('deliveryAddress[fullName]'),
+                                email: formData.get('deliveryAddress[email]'),
+                                phone: formData.get('deliveryAddress[phone]'),
+                                country: formData.get('deliveryAddress[country]'),
+                                city: formData.get('deliveryAddress[city]'),
+                                address: formData.get('deliveryAddress[address]'),
+                                zipCode: formData.get('deliveryAddress[zipCode]')
+                            },
+                            orderNotes: formData.get('orderNotes'),
                             paymentMethod: formData.get('paymentMethod')
                         };
 
                         console.log("Sending data to backend:", data);
 
                         try {
-                            const response = await fetch("http://localhost:5006/checkoutApi", {
+                            const response = await fetch("/checkoutApi", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
                                 body: JSON.stringify(data)
                             });
                             const result = await response.json();
 
-                            if (result.payuData) {
-                                // Redirect to PayU payment page
-                                const payuUrl = "https://test.payu.in/_payment"; // PayU test URL
-                                const form = document.createElement("form");
-                                form.method = "POST";
-                                form.action = payuUrl;
+                            if (result.success) {
+                                if (result.payuData) {
+                                    // Redirect to PayU payment page
+                                    const payuUrl = "https://test.payu.in/_payment"; // PayU test URL
+                                    const form = document.createElement("form");
+                                    form.method = "POST";
+                                    form.action = payuUrl;
 
-                                for (const key in result.payuData) {
-                                    const input = document.createElement("input");
-                                    input.type = "hidden";
-                                    input.name = key;
-                                    input.value = result.payuData[key];
-                                    form.appendChild(input);
+                                    for (const key in result.payuData) {
+                                        const input = document.createElement("input");
+                                        input.type = "hidden";
+                                        input.name = key;
+                                        input.value = result.payuData[key];
+                                        form.appendChild(input);
+                                    }
+
+                                    document.body.appendChild(form);
+                                    form.submit();
+                                } else {
+                                    window.location.href = "/orders";
                                 }
-
-                                document.body.appendChild(form);
-                                form.submit();
                             } else {
-                                alert("Payment data not received. Please try again.");
+                                Toastify({
+                                    text: result.message || "Payment data not received. Please try again.",
+                                    duration: 3000,
+                                    gravity: "top",
+                                    position: "right",
+                                    backgroundColor: "#FF0000"
+                                }).showToast();
                             }
                         } catch (error) {
                             console.error("Error during checkout:", error);
-                            alert("An error occurred during checkout. Please try again.");
+                            Toastify({
+                                text: "An error occurred during checkout. Please try again.",
+                                duration: 3000,
+                                gravity: "top",
+                                position: "right",
+                                backgroundColor: "#FF0000"
+                            }).showToast();
                         }
                     }
                 </script>
@@ -641,6 +668,7 @@
     </script>
 
     <!--===== All JavaScript files =====-->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <!--===== Plugins for this template =====-->
