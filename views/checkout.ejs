@@ -409,7 +409,7 @@
                         console.log("Sending data to backend:", data);
 
                         try {
-                            const response = await fetch("http://localhost:5006/checkoutApi", {
+                            const response = await fetch("/checkoutApi", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
                                 body: JSON.stringify(data)
