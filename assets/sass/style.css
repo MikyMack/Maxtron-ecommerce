@@ -25665,6 +25665,14 @@ font-size: 12px!important;
       text-align: start!important;
       align-items: start;
     }
+
+    @media screen and (max-width: 768px) {
+      .product-card {
+        justify-content: center!important;
+        text-align: center!important;
+        align-items: center;
+      }
+    }
     .price{
       text-align: start!important;
       display: flex!important;

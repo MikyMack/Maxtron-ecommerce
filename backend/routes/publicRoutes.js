@@ -13,10 +13,11 @@ router.get('/', async (req, res) => {
         const token = req.cookies.token;
         let user = null;
         let products = [];
+        let blogs = [];
+        
         if (token) {
             try {
                 const decoded = jwt.verify(token, process.env.SESSION_SECRET);
-
                 user = await User.findById(decoded.id);
             } catch (err) {
                 console.error("JWT Verification Error:", err);
@@ -29,10 +30,16 @@ router.get('/', async (req, res) => {
             console.error("Error fetching products:", err);
         }
 
-        res.render('index', { title: 'Home', user, products }); 
+        try {
+            blogs = await Blog.find();
+        } catch (err) {
+            console.error("Error fetching blogs:", err);
+        }
+
+        res.render('index', { title: 'Home', user, products, blogs }); 
     } catch (error) {
-        console.error("Error in Home Route:", error);
-        res.render('index', { title: 'Home', user: null, products: [] });
+     const  blog = await Blog.find();
+        res.render('index', { title: 'Home', user: null, products: [], blog});
     }
 });
 

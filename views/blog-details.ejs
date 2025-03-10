@@ -179,10 +179,10 @@
                     <div class="col col-xs-12">
                         <div class="wpo-breadcumb-wrap">
                             <ol>
-                                <li> <a href="blogs.html">Our Blog</a></li>
+                                <li> <a href="/blogs">Our Blog</a></li>
                                 <li>Blog Details</li>
                             </ol>
-                            <h2 class="poort-text poort-in-right">From Innovation to Sustainability: The Journey of Maxtron’s Waste Solutions</h2>
+                            <h2 class="poort-text poort-in-right"><%= blog.title %></h2>
                         </div>
                     </div>
                 </div>
@@ -196,21 +196,16 @@
                     <div class="wpo-blog-content">
                         <div class="post format-standard-image scroll-text-animation" data-animation="fade_from_bottom">
                             <div class="entry-media blog-img">
-                                <img src="/images/blog/blog-1/blogimg.jpeg" alt>
+                                <img src="/<%= blog.image %>" alt="<%= blog.title %>">
                             </div>
                             <div class="entry-meta">
                                 <ul>
-                                    <li>By:<a href="#">admin </a> </li>
-                                    <li>Date: Sep 09, 2025</li>
+                                    <li>By:<a href="#"><%= blog.author %></a></li>
+                                    <li>Date: <%= blog.date.toDateString() %></li>
                                 </ul>
                             </div>
 
-                            <p><span>W</span>aste management is an essential part of maintaining a clean and sustainable environment. At Maxtron Associates, we have dedicated ourselves to creating high-quality waste disposal solutions that not only meet industry standards but also contribute to a greener future. Our journey from innovation to sustainability has been driven by a commitment to quality, durability, and environmental responsibility.
-                                <br><br>
-                                Maxtron Associates started with a vision to revolutionize waste disposal by producing durable and reliable waste bags. Using cutting-edge blown film extrusion technology, we developed high-performance plastic bags that are tear-resistant, moisture-proof, and capable of handling heavy loads. Our team continuously researches and innovates to enhance the strength and functionality of our products, ensuring they meet the demands of various industries.</p>
-
-                            
-
+                            <p><span><%= blog.description.charAt(0) %></span><%= blog.description.slice(1) %></p>
                         </div>
                         <div class="tag-wrap scroll-text-animation" data-animation="fade_from_bottom">
                             <div class="tag-share-s2">
@@ -231,7 +226,7 @@
                                 <div class="tag">
                                     <span>Tags:</span>
                                     <ul>
-                                        <li><a href="#">Waste managment</a></li>
+                                        <li><a href="#">Waste management</a></li>
                                         <li><a href="#">Waste Bags</a></li>
                                     </ul>
                                 </div>
@@ -239,22 +234,7 @@
                             <!-- end tag-share -->
                         </div>
 
-                        <div class="more-posts scroll-text-animation" data-animation="fade_from_bottom">
-                            <div class="previous-post">
-                                <a href="blog.html">
-                                    <span class="post-control-link">Previous Post</span>
-                                    <span class="post-name">Revolutionizing Waste Management: How Maxtron Ensures Quality & Sustainability</span>
-                                </a>
-                            </div>
-                            <div class="next-post">
-                                <a href="blog-left-sidebar.html">
-                                    <span class="post-control-link">Next Post</span>
-                                    <span class="post-name">The Future of Waste Disposal: Maxtron’s Commitment to Innovation </span>
-                                </a>
-                            </div>
-                        </div>
-
-                   
+                     
                     </div>
                 </div>
             </div>
