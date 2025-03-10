@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Category = require('../models/Category');
+// const Category = require('../models/Category');
 const Product = require('../models/Product');
 const User = require('../models/User');
 const Blog = require('../models/Blog');
 const Cart = require('../models/Cart');
 const Order = require('../models/Order');
-const Testimonial = require('../models/Testimonial');
+// const Testimonial = require('../models/Testimonial');
 const jwt = require('jsonwebtoken');
 
 router.get('/', async (req, res) => {
@@ -39,8 +39,8 @@ router.get('/', async (req, res) => {
 
         res.render('index', { title: 'Home', user, products, blogs }); 
     } catch (error) {
-     const  blog = await Blog.find();
-        res.render('index', { title: 'Home', user: null, products: [], blog});
+     const  blogs = await Blog.find();
+        res.render('index', { title: 'Home', user: null, products: [], blogs});
     }
 });
 
