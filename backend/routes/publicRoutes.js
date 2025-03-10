@@ -5,6 +5,7 @@ const Product = require('../models/Product');
 const User = require('../models/User');
 const Blog = require('../models/Blog');
 const Cart = require('../models/Cart');
+const Order = require('../models/Order');
 const Testimonial = require('../models/Testimonial');
 const jwt = require('jsonwebtoken');
 
@@ -137,6 +138,47 @@ router.get('/services', async (req, res) => {
         res.render('services', { title: 'Services', user });
     } catch (error) {
         res.status(500).render('services', { title: 'Services', user: null });
+    }
+});
+router.get('/orders', async (req, res) => {
+    try {
+        const token = req.cookies.token;
+        let user = null;
+        let currentOrders = [];
+        let completedOrders = [];
+        let currentOrderProducts = [];
+        let completedOrderProducts = [];
+        
+        if (token) {
+            try {
+                const decoded = jwt.verify(token, process.env.SESSION_SECRET);
+
+                user = await User.findById(decoded.id);
+                if (user) {
+                    currentOrders = await Order.find({ user: user._id, status: { $ne: 'Delivered' } }).populate('items.product');
+                    completedOrders = await Order.find({ user: user._id, status: 'Delivered' }).populate('items.product');
+                    
+                    currentOrderProducts = await Promise.all(currentOrders.map(async order => {
+                        return await Promise.all(order.items.map(async item => {
+                            const product = await Product.findById(item.product._id);
+                            return { ...item.product.toObject(), image: product.images[0] };
+                        }));
+                    }));
+
+                    completedOrderProducts = await Promise.all(completedOrders.map(async order => {
+                        return await Promise.all(order.items.map(async item => {
+                            const product = await Product.findById(item.product._id);
+                            return { ...item.product.toObject(), image: product.images[0] };
+                        }));
+                    }));
+                }
+            } catch (err) {
+                console.error("JWT Verification Error:", err);
+            }
+        }
+        res.render('orders', { title: 'orders', user, currentOrders, completedOrders, currentOrderProducts, completedOrderProducts });
+    } catch (error) {
+        res.status(500).render('userLogin', { title: 'user Login', user: null });
     }
 });
 router.get('/polyBagProduction', async (req, res) => {

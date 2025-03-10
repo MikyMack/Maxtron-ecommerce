@@ -2,15 +2,14 @@ const express = require("express");
 const crypto = require("crypto");
 const axios = require("axios");
 const Order = require("../models/Order");
+const Cart = require("../models/Cart");
 require("dotenv").config();
 
 const router = express.Router();
 
-
-
 router.post("/checkoutApi", async (req, res) => {
     try {
-        const { userId, items, totalAmount, billingAddress, paymentMethod } = req.body;
+        const { userId, items, totalAmount, billingAddress, paymentMethod, orderNotes, deliveryAddress } = req.body;
 
         const order = new Order({
             user: userId,
@@ -18,13 +17,16 @@ router.post("/checkoutApi", async (req, res) => {
             totalAmount,
             billingAddress,
             paymentMethod,
-            status: "Pending",
+            deliveryAddress,
+            orderNotes,
+            status: paymentMethod === "COD" ? "Processing" : "Pending",
         });
 
         await order.save();
 
         if (paymentMethod === "COD") {
-            return res.json({ success: true, message: "Order placed successfully!" });
+            await Cart.deleteOne({ userId: userId });
+            return res.json({ success: true, message: "Order placed successfully and cart deleted!" });
         }
 
         const txnid = "txn" + Date.now();
