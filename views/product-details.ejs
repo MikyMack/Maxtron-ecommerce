@@ -63,10 +63,16 @@
                         <div class="col-6 d-flex justify-content-end">
                             <ul class="contact-info d-flex" style="font-size: 12px; white-space: nowrap;">
                                 <li>
-                                    <a href="/contact">
-                                        Contact
-                                        <span>Now</span>
-                                    </a>
+                                    <% if (user) { %>
+                                        <a href="/orders">
+                                            My Orders
+                                        </a>
+                                    <% } else { %>
+                                        <a href="/user-login">
+                                            Login
+                                            <span>Now</span>
+                                        </a>
+                                    <% } %>
                                 </li>
                             </ul>
                         </div>
