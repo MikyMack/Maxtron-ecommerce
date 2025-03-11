@@ -310,7 +310,7 @@
                             <!-- main-content-wrap -->
                             <div class="main-content-wrap">
                                 <div class="flex items-center flex-wrap justify-between gap20 mb-30">
-                                    <h3>Clients Management</h3>
+                                    <h3>Users Management</h3>
                                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                                         <li>
                                             <a href="/dashboard"><div class="text-tiny">Dashboard</div></a>
@@ -319,55 +319,58 @@
                                             <i class="icon-chevron-right"></i>
                                         </li>
                                         <li>
-                                            <a href="#"><div class="text-tiny">Clients management</div></a>
+                                            <a href="#"><div class="text-tiny">Users management</div></a>
                                         </li>
                                         <li>
                                             <i class="icon-chevron-right"></i>
                                         </li>
                                         <li>
-                                            <div class="text-tiny">All Clients</div>
+                                            <div class="text-tiny">All Users</div>
                                         </li>
                                     </ul>
                                 </div>
                                 <!-- all-category -->
                                 <div class="wg-box">
-                                    <div class="flex items-center justify-between gap10 flex-wrap">
-                                       
-                                        <a class="tf-button style-1 w208" href="/admin-new-clients"><i class="icon-plus"></i>Add new </a>
-                                    </div>
                                     <div class="wg-table table-all-category">
                                         <ul class="table-title flex gap20 mb-14">
                                             <li>
-                                                <div class="body-title">Clients image</div>
+                                                <div class="body-title">User Image</div>
                                             </li>    
-                                                            
                                             <li>
                                                 <div class="body-title">Name</div>
                                             </li>    
-                                                            
+                                            <li>
+                                                <div class="body-title">Email</div>
+                                            </li>
+                                            <li>
+                                                <div class="body-title">Role</div>
+                                            </li>
+                                            <li>
+                                                <div class="body-title">Status</div>
+                                            </li>
                                             <li>
                                                 <div class="body-title">Action</div>
                                             </li>
                                         </ul>
                                         <ul class="flex flex-column">
-                                            <% clients.forEach(client => { %>
+                                            <% users.forEach(user => { %>
                                             <li class="wg-product item-row gap20">
                                                 <div class="name">
                                                     <div class="image">
-                                                        <img src="<%= client.image %>" alt="<%= client.title %>">
+                                                        <img src="<%= user.image || 'default-avatar.png' %>" alt="<%= user.name %>">
                                                     </div>
                                                 </div>
-                                                <div class="body-text text-main-dark mt-4"><%= client.title %></div>
-                                               
+                                                <div class="body-text text-main-dark mt-4"><%= user.name %></div>
+                                                <div class="body-text text-main-dark mt-4"><%= user.email %></div>
+                                                <div class="body-text text-main-dark mt-4"><%= user.isAdmin ? 'Admin' : 'User' %></div>
+                                                <div class="body-text text-main-dark mt-4"><%= user.blocked ? 'Blocked' : 'Active' %></div>
                                                 <div class="list-icon-function">
-                                                    <div class="item edit">
-                                                        <a href="/admin-edit-client/<%= client._id %>"><i class="icon-edit-3"></i></a>
-                                                    </div>
-                                                    <div class="item trash">
-                                                        <div  onclick="deleteClient('<%= client._id %>');"><i class="icon-trash-2"></i></div>
-                                                    </div>
-                                                    <div class="item toggle" onclick="toggleClient('<%= client._id %>', this)">
-                                                        <i class="fa fa-toggle-<%= client.toggled ? 'on' : 'off' %>"></i>
+                                                    <div class="item block">
+                                                        <% if (!user.blocked) { %>
+                                                            <a href="/admin-block-user/<%= user._id %>"><i class="icon-ban"></i></a>
+                                                        <% } else { %>
+                                                            <span class="text-muted">Blocked</span>
+                                                        <% } %>
                                                     </div>
                                                 </div>
                                             </li>
@@ -376,7 +379,7 @@
                                     </div>
                                     <div class="divider"></div>
                                     <div class="flex items-center justify-between flex-wrap gap10">
-                                        <div class="text-tiny">Showing <%= clients.length %> entries</div>                           
+                                        <div class="text-tiny">Showing <%= users.length %> entries</div>                           
                                     </div>
                                 </div>
                                 <!-- /all-category -->

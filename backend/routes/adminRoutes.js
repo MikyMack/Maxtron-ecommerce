@@ -179,17 +179,16 @@ app.get('/admin-users', authMiddleware, async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-app.get('/admin-edit-user/:id', authMiddleware, async (req, res) => {
+app.get('/admin-block-user/:id', authMiddleware, async (req, res) => {
     try {
         const userId = req.params.id;
-        const users = await Users.findById(userId);
-        if (!users) {
-            return res.status(404).send('user not found');
+        const user = await Users.findById(userId);
+        if (!user) {
+            return res.status(404).send('User not found');
         }
-        res.render('admin-edit-user', {
-            title: 'Edit User',
-            users
-        });
+        user.blocked = true;
+        await user.save();
+        res.redirect('/admin-users');
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

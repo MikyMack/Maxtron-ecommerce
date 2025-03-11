@@ -3525,7 +3525,7 @@ img {
 --------------------------------------------------------------*/
 .wpo-hero-slider {
   width: 100%;
-  height: 100vh;
+  height: 60vh;
   display: flex;
   position: relative;
   z-index: 0;
@@ -3537,14 +3537,14 @@ img {
 }
 @media (max-width: 991px) {
   .wpo-hero-slider {
-    height: 100vh;
+    height: 60vh;
     display: block;
     padding: 300px 0 400px;
   }
 }
 @media (max-width: 575px) {
   .wpo-hero-slider {
-    padding: 200px 0 200px;
+    padding: 200px 0 20px;
   }
 }
 .wpo-hero-slider .swiper-slide {
@@ -3553,7 +3553,7 @@ img {
 .wpo-hero-slider .swiper-container,
 .wpo-hero-slider .hero-container {
   width: 100%;
-  height: 100%;
+  height: 60vh;
   position: absolute;
   left: 0;
   top: 0;
@@ -3561,7 +3561,7 @@ img {
 .wpo-hero-slider .slide-inner,
 .wpo-hero-slider .hero-inner {
   width: 100%;
-  height: 100%;
+  height: 60vh;
   position: absolute;
   left: 0;
   top: 0;
@@ -3579,7 +3579,7 @@ img {
   left: 0;
   top: 0;
   width: 100%;
-  height: 100vh;
+  height: 60vh;
   content: "";
   background-color: rgba(0, 0, 0, 0.5); /* Light overlay black color */
 }
@@ -3667,9 +3667,9 @@ img {
   }
 }
 .wpo-hero-slider .slide-content h2 {
-  font-size: 120px;
+  font-size: 60px;
   font-weight: 600;
-  line-height: 150px;
+  line-height: 70px;
   margin-bottom: 0;
   color: white;
   animation: textZoomIn 2s ease-in-out forwards;
@@ -25320,15 +25320,15 @@ font-size: 12px!important;
 
 /* Individual button colors */
 .email-btn {
-  background-color: black;
+  background-color: #9b6f69;
 }
 
 .whatsapp-btn {
-  background-color: black;
+  background-color: #9b6f69;
 }
 
 .phone-btn {
-  background-color: black;
+  background-color: #9b6f69;
 }
 
 /* Enquiry button */
@@ -25338,7 +25338,7 @@ font-size: 12px!important;
   top: 30%;
   transform: translateY(-50%) rotate(-90deg);
   transform-origin: right bottom;
-  background-color: black;
+  background-color: #9b6f69;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -26444,44 +26444,5 @@ text-align: start!important;
 @media (max-width: 400px) {
   li.gpslocation {
       display: none;
-  }
-}
-.time-date-display {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
-  color: white;
-  padding: 10px 20px;
-  border-radius: 30px;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  z-index: 10;
-  width: 90%;
-  max-width: 300px;
-}
-
-#time {
-  font-size: 6vw;
-  font-weight: bold;
-}
-
-#date {
-  font-size: 4vw;
-  opacity: 0.5;
-}
-
-@media (min-width: 768px) {
-  #time {
-    font-size: 24px;
-  }
-
-  #date {
-    font-size: 16px;
   }
 }
