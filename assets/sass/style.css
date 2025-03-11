@@ -3579,7 +3579,7 @@ img {
   width: 100%;
   height: 60vh;
   content: "";
-  background-color: rgba(0, 0, 0, 0.5); /* Light overlay black color */
+  background-color: rgba(0, 0, 0, 0.3); /* Light overlay black color */
 }
 .wpo-hero-slider .swiper-pagination-bullet {
   width: 12px;
@@ -25313,7 +25313,7 @@ font-size: 12px!important;
   text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: rgba(0, 0, 0, 0.9) !important;
+  background-color: #9b6f69 !important;
 }
 
 /* Individual button colors */
@@ -25674,11 +25674,7 @@ font-size: 12px!important;
       display: flex;
       justify-content: start!important;
       text-align: start!important;
-<<<<<<< HEAD
-     
-=======
   
->>>>>>> main
     }
 
     /* @media screen and (max-width: 768px) {
@@ -25708,6 +25704,7 @@ font-size: 12px!important;
         margin: auto!important;
         
       }
+   
   
 .navlogo1 {
   display: flex;

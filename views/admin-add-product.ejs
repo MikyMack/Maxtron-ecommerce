@@ -51,7 +51,7 @@
                 <div class="section-menu-left">
                     <div class="box-logo">
                         <a href="/dashboard" id="site-logo-inner">
-                            <img style="width:60px;" id="logo_header" alt="logo" src="/images/max-logo.png"
+                            <img style="width:60px;" id="logo_header" alt="rettic" src="/images/max-logo.png"
                                 data-light="/images/max-logo.png" data-dark="/images/max-logo.png">
                         </a>
                         <div class="button-show-hide">
@@ -62,7 +62,7 @@
                         <div class="center">
                             <div class="center-item">
                                 <ul class="">
-                                    <li class="menu-item">
+                                    <li class="menu-item ">
                                         <a href="/dashboard" class="">
                                             <div class="icon">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -75,8 +75,8 @@
                                             <div class="text">Admin Dashboard</div>
                                         </a>
                                     </li>
-                                    <li class="menu-item has-children active">
-                                        <a href="javascript:void(0);" class="menu-item-button">
+                                    <li class="menu-item has-children">
+                                        <a href="javascript:void(0);" class="menu-item-button active">
                                             <div class="icon"><i class="icon-file-plus"></i></div>
                                             <div class="text">Product Management</div>
                                         </a>
@@ -86,8 +86,8 @@
                                                     <div class="text">All Products</div>
                                                 </a>
                                             </li>
-                                            <li class="sub-menu-item active">
-                                                <a href="/admin-add-product" class="">
+                                            <li class="sub-menu-item">
+                                                <a href="/admin-add-product" class="active">
                                                     <div class="text">Add Product</div>
                                                 </a>
                                             </li>
@@ -96,19 +96,19 @@
                                     <li class="menu-item has-children">
                                         <a href="javascript:void(0);" class="menu-item-button">
                                             <div class="icon"><i class="icon-layers"></i></div>
-                                            <div class="text">Category Management</div>
+                                            <div class="text">Order Management</div>
                                         </a>
                                         <ul class="sub-menu">
                                             <li class="sub-menu-item">
-                                                <a href="/admin-category-list" class="">
-                                                    <div class="text">Category list</div>
+                                                <a href="/admin-orders" class="">
+                                                    <div class="text">Order list</div>
                                                 </a>
                                             </li>
-                                            <li class="sub-menu-item">
+                                            <!-- <li class="sub-menu-item">
                                                 <a href="/admin-new-category" class="">
                                                     <div class="text">New category</div>
                                                 </a>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </li>
                                     <li class="menu-item has-children">
@@ -136,38 +136,16 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="menu-item has-children">
-                                        <a href="javascript:void(0);" class="menu-item-button">
-                                            <div class="icon"><i class="fa fa-coffee"></i></div>
-                                            <div class="text">Logo Management</div>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class="sub-menu-item">
-                                                <a href="/admin-logo" class="">
-                                                    <div class="text">Logo list</div>
-                                                </a>
-                                            </li>
-                                            <li class="sub-menu-item">
-                                                <a href="/admin-add-logo" class="">
-                                                    <div class="text">New Logo</div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                 
                                     <li class="menu-item has-children">
                                         <a href="javascript:void(0);" class="menu-item-button">
                                             <div class="icon"><i class="fa fa-users"></i></div>
-                                            <div class="text">Clients Management</div>
+                                            <div class="text">User Management</div>
                                         </a>
                                         <ul class="sub-menu">
                                             <li class="sub-menu-item">
-                                                <a href="/admin-clients" class="">
-                                                    <div class="text">Clients list</div>
-                                                </a>
-                                            </li>
-                                            <li class="sub-menu-item">
-                                                <a href="/admin-new-clients" class="">
-                                                    <div class="text">New Client</div>
+                                                <a href="/admin-users" class="">
+                                                    <div class="text">Users list</div>
                                                 </a>
                                             </li>
                                         </ul>
@@ -190,8 +168,26 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li class="menu-item has-children">
+                                        <a href="javascript:void(0);" class="menu-item-button">
+                                            <div class="icon"><i class="fa fa-star-o"></i></div>
+                                            <div class="text">Blogs Management</div>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            <li class="sub-menu-item">
+                                                <a href="/admin-blogs" class="">
+                                                    <div class="text">Blogs list</div>
+                                                </a>
+                                            </li>
+                                            <li class="sub-menu-item">
+                                                <a href="/admin-add-blogs" class="">
+                                                    <div class="text">New Blog</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                     <li class="menu-item">
-                                        <a href="admin-login.html" class="">
+                                        <a href="/logout" class="">
                                             <div class="icon">
                                                 <svg width="24" height="22" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -244,7 +240,7 @@
                                                     <img src="admin-images/avatar/user-1.png" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    <span class="body-text text-main-dark">Tuscany</span>
+                                                    <span class="body-text text-main-dark">Maxtron</span>
                                                     <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>
