@@ -3531,9 +3531,7 @@ img {
   z-index: 0;
 }
 @media (max-width: 1199px) {
-  .wpo-hero-slider {
-    height: 800px;
-  }
+
 }
 @media (max-width: 991px) {
   .wpo-hero-slider {
