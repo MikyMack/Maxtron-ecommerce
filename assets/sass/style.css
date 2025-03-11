@@ -25315,6 +25315,7 @@ font-size: 12px!important;
   text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.9) !important;
 }
 
 /* Individual button colors */
@@ -25642,7 +25643,7 @@ font-size: 12px!important;
     }
     .product-actions { 
       display: flex; 
-      justify-content: space-between; 
+      justify-content: space-between!important; 
       align-items: center; 
     }
     .quantity-selector { 
@@ -25675,14 +25676,14 @@ font-size: 12px!important;
       display: flex;
       justify-content: start!important;
       text-align: start!important;
-      align-items: start;
+     
     }
 
     @media screen and (max-width: 768px) {
       .product-card {
         justify-content: center!important;
         text-align: center!important;
-        align-items: center;
+        
       }
     }
     .price{
@@ -25903,7 +25904,7 @@ font-size: 12px!important;
 }
 
 .xanthic_provider_data {
-
+ text-align:start!important;
   font-size: 14px;
   color: #666;
   margin-bottom: 10px;
@@ -25927,7 +25928,7 @@ margin-bottom: 5px;
 }
 
 .xanthic_quantity_requisite {
-
+text-align: start!important;
   font-size: 13px;
   color: #555;
   margin-bottom: 10px;
