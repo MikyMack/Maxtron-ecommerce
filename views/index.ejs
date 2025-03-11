@@ -122,7 +122,7 @@
 
                                                 <li><a href="/biomining">Biomining services</a></li>
                                                 <!-- <li><a href="/wasteManagement">Waste Management Facility Maintenance</a></li> -->
-                                                <!-- <li><a href="/medicalWasteCollection">Medical Waste Collection</a></li> -->
+                                                <li><a href="/medicalWasteCollection">Medical Waste Collection</a></li>
                                                 <!-- <li><a href="/recyclableWaste">Recyclable Waste Solutions</a></li> -->
                                             </ul>
                                         </li>
@@ -224,6 +224,113 @@
         </section>
 
         <!--===== start wpo-about-section =====-->
+        <section class="wpo-about-section-s2 section-padding">
+            <div class="about-wrap d-flex flex-wrap-reverse">
+                <div class="image-1 fade_bottom abt-img" style="padding: 10px;">
+                    <img src="/images/home/abt.webp" alt="">
+                </div>
+                <div class="content">
+                    <h2 class="poort-text poort-in-right abt-text">About Maxtron Associates</h2>
+                    <div class="content-left">
+                        <p class="fade_bottom">Established in 2017, Maxtron Associates started as a transportation service provider to one of the leading operators of Common Biomedical Waste Disposal and Treatment Facilities of Kerala. We took responsibility sharing with the parent company, when bio medical waste management in Kerala was a challenge.  Be it individual homes or apartments, healthcare, government, transportation, commercial, institutional and industrial sectors; you can depend on MAXTRON ASSOCIATES for customized waste management related supplies that deliver bottom-line results.
+                            
+                           
+                        </p>
+                    
+                    </div>
+                    <div class="about-btn fade_bottom">
+                        <a href="/about" class="theme-btn abt-btn"> <span class="rolling-text">Discover More</span> </a>
+                        <!-- <div class="video-wrap">
+                            <div class="video-holder">
+                                <a href="https://www.youtube.com/embed/uySn1BZiWWs?si=XcM3FYqzlXkJaB0v"
+                                    class="video-btn" data-type="iframe">
+                                    <svg width="24" height="27" viewBox="0 0 24 27" fill="none">
+                                        <path
+                                            d="M22.25 15.665L4.99999 25.6243C3.33333 26.5865 1.25 25.3837 1.25 23.4592L1.25 3.54063C1.25 1.61613 3.33333 0.413319 5 1.37557L22.25 11.3349C23.9167 12.2971 23.9167 14.7027 22.25 15.665Z"
+                                            stroke="black" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <span>Watch Videos</span>
+                        </div> -->
+                    </div>
+
+                </div>
+          
+            </div>
+        </section>
+        <section class="product-section">
+            <div class="container">
+                <h2 class="section-title">Our Products</h2>
+                <div class="product-grid">
+                    <% products.forEach(product => { %>
+                        <div class="product-card <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'sold-out' : '' %>">
+                            <div class="product-image">
+                                <a href="/product-details/<%= product._id %>">
+                                    <img src="<%= product.images[0] %>" alt="<%= product.title %>">
+                                </a>
+                                
+                                <% if (product.measurements.every(measurement => measurement.stocks === 0)) { %>
+                                    <div class="sold-out-overlay">Sold Out</div>
+                                <% } %>
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">
+                                    <a style="color: black;" href="/product-details/<%= product._id %>"><%= product.title %></a>
+                                </h3>
+                                <div class="xanthic_provider_data">Seller: OEM</div>
+                                  <div class="d-flex p-0">
+                                    <div class="xanthic_quality_indicator">4.5 - 5.0 ★</div>
+                                    <span class="xanthic_verification_seal">VA ✓</span>
+                                  </div>      
+                                
+                                
+                                <div class="xanthic_provider_data">Brand: Maxtron Associates</div>
+                                
+                                <div class="xanthic_quantity_requisite">Min. Qty. Per Consignee: 5000</div>
+                                <div class="price">
+                                    <% const discount = product.measurements[0].offerPrice ?
+                                        Math.round(((product.measurements[0].price -
+                                        product.measurements[0].offerPrice) / product.measurements[0].price) * 100)
+                                        : 0; %>
+                                    <% if (discount > 0) { %>
+                                        <span class="discount"
+                                            style="color: rgb(77, 77, 77); font-size: small;">
+                                            <%= discount %>% discount
+                                        </span>
+                                    <% } %>
+                                    <del id="price-<%= product._id %>">₹<%= product.measurements[0].price %></del>
+                                    <span id="offerPrice-<%= product._id %>">₹<%= product.measurements[0].offerPrice || product.measurements[0].price %></span>
+                                </div>
+                                <div class="product-details d-flex justify-content-start align-items-start">
+                                    <div class="measurement">
+                                        <label for="measurement-<%= product._id %>">Select Size:</label>
+                                        <select style="border: 1px solid #dfdfdf ;" id="measurement-<%= product._id %>" class="measurement-select"
+                                            data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>
+                                            <% product.measurements.forEach((measurement, index) => { %>
+                                                <option value="<%= index %>">
+                                                    <%= measurement.length %>cm x <%= measurement.width %>cm
+                                                </option>
+                                            <% }) %>
+                                        </select>
+                                    </div>
+                                  
+                                </div>
+                                <div class="product-actions">
+                                    <div class="quantity-selector">
+                                        <button style="background-color: black; color: white;" class="qty-btn dec" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> - </button>
+                                        <input type="text" class="quantityCount" value="1" id="qty-<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>
+                                        <button style="background-color: black; color: white;" class="qty-btn inc" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> + </button>
+                                    </div>
+                                    <a href="#" class="add-to-cart" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </section>
+        <!--===== start wpo-service-section =====-->
         <section class="wpo-service-section">
             <div class="container-fluid p-0 r">
                 <div class="service-top">
@@ -351,115 +458,6 @@
                 </div>
             </div>
         </section>
-        <section class="product-section">
-            <div class="container">
-                <h2 class="section-title">Our Products</h2>
-                <div class="product-grid">
-                    <% products.forEach(product => { %>
-                        <div class="product-card <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'sold-out' : '' %>">
-                            <div class="product-image">
-                                <a href="/product-details/<%= product._id %>">
-                                    <img src="<%= product.images[0] %>" alt="<%= product.title %>">
-                                </a>
-                                
-                                <% if (product.measurements.every(measurement => measurement.stocks === 0)) { %>
-                                    <div class="sold-out-overlay">Sold Out</div>
-                                <% } %>
-                            </div>
-                            <div class="product-info">
-                                <h3 class="product-title">
-                                    <a style="color: black;" href="/product-details/<%= product._id %>"><%= product.title %></a>
-                                </h3>
-                                <div class="xanthic_provider_data">Seller: OEM</div>
-                                  <div class="d-flex p-0">
-                                    <div class="xanthic_quality_indicator">4.5 - 5.0 ★</div>
-                                    <span class="xanthic_verification_seal">VA ✓</span>
-                                  </div>      
-                                
-                                
-                                <div class="xanthic_provider_data">Brand: Maxtron Associates</div>
-                                
-                                <div class="xanthic_quantity_requisite">Min. Qty. Per Consignee: 5000</div>
-                                <div class="price">
-                                    <% const discount = product.measurements[0].offerPrice ?
-                                        Math.round(((product.measurements[0].price -
-                                        product.measurements[0].offerPrice) / product.measurements[0].price) * 100)
-                                        : 0; %>
-                                    <% if (discount > 0) { %>
-                                        <span class="discount"
-                                            style="color: rgb(77, 77, 77); font-size: small;">
-                                            <%= discount %>% discount
-                                        </span>
-                                    <% } %>
-                                    <del id="price-<%= product._id %>">₹<%= product.measurements[0].price %></del>
-                                    <span id="offerPrice-<%= product._id %>">₹<%= product.measurements[0].offerPrice || product.measurements[0].price %></span>
-                                </div>
-                                <div class="product-details d-flex justify-content-start align-items-start">
-                                    <div class="measurement">
-                                        <label for="measurement-<%= product._id %>">Select Size:</label>
-                                        <select style="border: 1px solid #dfdfdf ;" id="measurement-<%= product._id %>" class="measurement-select"
-                                            data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>
-                                            <% product.measurements.forEach((measurement, index) => { %>
-                                                <option value="<%= index %>">
-                                                    <%= measurement.length %>cm x <%= measurement.width %>cm
-                                                </option>
-                                            <% }) %>
-                                        </select>
-                                    </div>
-                                  
-                                </div>
-                                <div class="product-actions">
-                                    <div class="quantity-selector">
-                                        <button style="background-color: black; color: white;" class="qty-btn dec" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> - </button>
-                                        <input type="text" class="quantityCount" value="1" id="qty-<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>
-                                        <button style="background-color: black; color: white;" class="qty-btn inc" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>> + </button>
-                                    </div>
-                                    <a href="#" class="add-to-cart" data-product-id="<%= product._id %>" <%= product.measurements.every(measurement => measurement.stocks === 0) ? 'disabled' : '' %>>Add to Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    <% }) %>
-                </div>
-            </div>
-        </section>
-
-        <section class="wpo-about-section-s2 section-padding">
-            <div class="about-wrap d-flex flex-wrap-reverse">
-                <div class="image-1 fade_bottom abt-img" style="padding: 10px;">
-                    <img src="/images/home/abt.webp" alt="">
-                </div>
-                <div class="content">
-                    <h2 class="poort-text poort-in-right abt-text">About Maxtron Associates</h2>
-                    <div class="content-left">
-                        <p class="fade_bottom">Established in 2017, Maxtron Associates started as a transportation service provider to one of the leading operators of Common Biomedical Waste Disposal and Treatment Facilities of Kerala. We took responsibility sharing with the parent company, when bio medical waste management in Kerala was a challenge.  Be it individual homes or apartments, healthcare, government, transportation, commercial, institutional and industrial sectors; you can depend on MAXTRON ASSOCIATES for customized waste management related supplies that deliver bottom-line results.
-                            
-                           
-                        </p>
-                    
-                    </div>
-                    <div class="about-btn fade_bottom">
-                        <a href="/about" class="theme-btn abt-btn"> <span class="rolling-text">Discover More</span> </a>
-                        <!-- <div class="video-wrap">
-                            <div class="video-holder">
-                                <a href="https://www.youtube.com/embed/uySn1BZiWWs?si=XcM3FYqzlXkJaB0v"
-                                    class="video-btn" data-type="iframe">
-                                    <svg width="24" height="27" viewBox="0 0 24 27" fill="none">
-                                        <path
-                                            d="M22.25 15.665L4.99999 25.6243C3.33333 26.5865 1.25 25.3837 1.25 23.4592L1.25 3.54063C1.25 1.61613 3.33333 0.413319 5 1.37557L22.25 11.3349C23.9167 12.2971 23.9167 14.7027 22.25 15.665Z"
-                                            stroke="black" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <span>Watch Videos</span>
-                        </div> -->
-                    </div>
-
-                </div>
-          
-            </div>
-        </section>
-        <!--===== start wpo-service-section =====-->
-       
         
         <section class="wpo-blog-section section-padding ">
             <div class="container-fulid">
@@ -634,14 +632,14 @@
             </div>
         </footer>
         <div class="floating-buttons">
-            <a target='_blank' href="mailto:maxtronassociateskerala@gmail.com" class="email-btn">
+            <a href="mailto:info@example.com" class="email-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="16" rx="2" ry="2" />
                     <path d="M3 6l9 6 9-6" />
                 </svg>
             </a>
-            <a target='_blank' href="https://wa.me/9745147000" class="whatsapp-btn">
+            <a href="https://wa.me/9745147000" class="whatsapp-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path
@@ -653,7 +651,7 @@
                 </svg>
 
             </a>
-            <a target='_blank' href="tel:+919745147000" class="phone-btn">
+            <a href="tel:+919745147000" class="phone-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path
