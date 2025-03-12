@@ -20,6 +20,7 @@
     <link href="/css/jquery.fancybox.css" rel="stylesheet">
     <link href="/css/odometer-theme-default.css" rel="stylesheet">
     <link href="/sass/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -98,15 +99,11 @@
                                     </div>
                                 </div>
                                 <p class="subText">Don't have an account? <a href="/user-register">Create free account</a></p>
-                                <% if (typeof message !== 'undefined') { %>
-                                    <div class="alert alert-danger" role="alert">
-                                        <%= message %>
-                                    </div>
-                                <% } %>
                             </div>
                         </form>
                         
                         <!-- JavaScript to handle form submission and clear localStorage -->
+                     
                         <script>
                             document.getElementById('loginForm').addEventListener('submit', async function (event) {
                                 event.preventDefault(); // Prevent the default form submission
@@ -119,11 +116,6 @@
                         
                                 // Create form data
                                 const formData = new FormData(this);
-                        
-                                // Log the form data for debugging
-                                for (let [key, value] of formData.entries()) {
-                                    console.log(key, value);
-                                }
                         
                                 // Submit the form data using Fetch API
                                 const response = await fetch('/api/auth/user-login', {
@@ -147,7 +139,14 @@
                                 } else {
                                     // Handle login error
                                     const data = await response.json();
-                                    alert(data.message); // Show error message
+                                    Toastify({
+                                        text: data.message,
+                                        duration: 3000,
+                                        close: true,
+                                        gravity: "top",
+                                        position: "right",
+                                        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                                    }).showToast();
                                 }
                             });
                         </script>
@@ -176,5 +175,6 @@
     <!--===== Custom script for this template =====-->
     <script src="/js/script.js"></script>
     <script src="/js/gsap-script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 </html>

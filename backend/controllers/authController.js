@@ -36,7 +36,7 @@ exports.userLogin = async (req, res) => {
         // Compare passwords
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials!' });
+            return res.status(400).json({ message: 'Incorrect Password or Mail !' });
         }
 
         if (user.blocked) return res.status(403).json({ message: 'User is blocked!' });
@@ -197,7 +197,7 @@ exports.forgotPassword = async (req, res) => {
 
         let user = await User.findOne({ email });
         if (!user) {
-            return res.render("forgotPassword", { title: "Forgot Password", error: "Email not found!" });
+            return res.render("forgot-password", { title: "Forgot Password", error: "Email not found!" });
         }
 
         // Generate OTP
@@ -209,12 +209,12 @@ exports.forgotPassword = async (req, res) => {
         // Send OTP via email
         const emailSent = await sendEmail(email, `Your OTP for password reset is: ${otp}`);
         if (!emailSent) {
-            return res.render("forgotPassword", { title: "Forgot Password", error: "Failed to send OTP!" });
+            return res.render("forgot-password", { title: "Forgot Password", error: "Failed to send OTP!" });
         }
 
         res.render("user-otp-reset", { title: "Verify OTP", email });
     } catch (error) {
-        res.render("forgotPassword", { title: "Forgot Password", error: error.message });
+        res.render("forgot-password", { title: "Forgot Password", error: error.message });
     }
 };
 
