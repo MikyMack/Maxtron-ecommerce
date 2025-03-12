@@ -262,7 +262,7 @@ img {
 }
 
 .section-padding {
-  padding: 120px 0;
+  padding: 60px 0;
 }
 @media (max-width: 991px) {
   .section-padding {
@@ -3577,7 +3577,7 @@ img {
   left: 0;
   top: 0;
   width: 100%;
-  height: 60vh;
+  height: 70vh;
   content: "";
   background-color: rgba(0, 0, 0, 0.3); /* Light overlay black color */
 }
