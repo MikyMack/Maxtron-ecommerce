@@ -246,3 +246,93 @@ exports.resetPassword = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
+
+// Make a user admin
+exports.makeAdmin = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        // Find user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found!' });
+        }
+
+        // Set the user's isAdmin field to true
+        user.isAdmin = true;
+        await user.save();
+
+        res.status(200).json({ success: true, message: 'User is now an admin.' });
+    } catch (error) {
+        console.error("Error in makeAdmin:", error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// Remove admin role from a user
+exports.removeAdmin = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        // Find user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found!' });
+        }
+
+        // Set the user's isAdmin field to false
+        user.isAdmin = false;
+        await user.save();
+
+        res.status(200).json({ success: true, message: 'User is no longer an admin.' });
+    } catch (error) {
+        console.error("Error in removeAdmin:", error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// Block a user
+exports.blockUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        // Find user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found!' });
+        }
+
+        // Set the user's blocked field to true
+        user.blocked = true;
+        await user.save();
+
+        res.status(200).json({ success: true, message: 'User has been blocked.' });
+    } catch (error) {
+        console.error("Error in blockUser:", error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+// Unblock a user
+exports.unblockUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        // Find user by ID
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found!' });
+        }
+
+        // Set the user's blocked field to false
+        user.blocked = false;
+        await user.save();
+
+        res.status(200).json({ success: true, message: 'User has been unblocked.' });
+    } catch (error) {
+        console.error("Error in unblockUser:", error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+

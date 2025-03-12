@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const upload = require('../middleware/upload');
+const User =require('../models/User')
 const categoryController = require('../controllers/categoryController'); 
+const authController = require('../controllers/authController'); 
 const bannerController = require('../controllers/bannerController');
 const productController = require('../controllers/productController');
 const blogsController = require('../controllers/blogsController');
@@ -10,6 +12,7 @@ const notificationController = require('../controllers/notificationCOntroller');
 const Notification=require('../models/Notification')
 const nodemailer = require('nodemailer');
 const authenticateUser = require('../middleware/auth');
+const PDFDocument = require('pdfkit');
 
 
 
@@ -144,5 +147,55 @@ router.get('/cart',productController.displayCart);
 router.post("/update-cart", productController.updateCart);
 router.get("/remove-from-cart/:productId", productController.removeFromCart);
 
+router.put('/admin-make-admin/:id', authController.makeAdmin);
+router.put('/admin-block-user/:id', authController.blockUser);
+router.put('/admin-remove-admin/:id', authController.removeAdmin);
+router.put('/admin-unblock-user/:id', authController.unblockUser);
+
+router.get('/download-user-list', async (req, res) => {
+    try {
+        const format = req.query.format; // Get the format (csv or pdf)
+        const users = await User.find(); // Fetch all users
+
+        if (format === 'pdf') {
+            // Create a PDF document
+            const doc = new PDFDocument();
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', 'attachment; filename=user-list.pdf');
+            doc.pipe(res);
+
+            // Add content to the PDF
+            doc.fontSize(14).text('User List', { align: 'center' });
+            doc.moveDown();
+
+            users.forEach(user => {
+                doc.fontSize(12).text(`Name: ${user.name}`);
+                doc.text(`Email: ${user.email}`);
+                doc.text(`Mobile No: ${user.mobile}`);
+                doc.text(`Role: ${user.isAdmin ? 'Admin' : 'User'}`);
+                doc.text(`Status: ${user.blocked ? 'Blocked' : 'Active'}`);
+                doc.moveDown();
+            });
+
+            doc.end();
+        } else if (format === 'csv') {
+             // Generate CSV content
+             let csvContent = 'Name,Email,Mobile No,Role,Status\n'; // CSV header
+             users.forEach(user => {
+                 csvContent += `${user.name},${user.email},${user.mobile},${user.isAdmin ? 'Admin' : 'User'},${user.blocked ? 'Blocked' : 'Active'}\n`;
+             });
+ 
+             // Set response headers for CSV download
+             res.setHeader('Content-Type', 'text/csv');
+             res.setHeader('Content-Disposition', 'attachment; filename=user-list.csv');
+             res.send(csvContent);
+        } else {
+            res.status(400).json({ success: false, message: 'Invalid format' });
+        }
+    } catch (error) {
+        console.error('Error generating user list:', error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
 
 module.exports = router;
