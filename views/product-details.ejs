@@ -666,12 +666,12 @@
                                     <h3>Quick Link</h3>
                                 </div>
                                 <ul>
-                                    <li><a href="about.html"><span class="rolling-text">About Us</span> </a></li>
-                                    <li><a href="shop.html"><span class="rolling-text">Shop</span></a></li>
-                                    <li><a href="services.html"><span class="rolling-text">Services</span> </a></li>
+                                    <li><a href="/about"><span class="rolling-text">About Us</span> </a></li>
+                                    <li><a href="/shop"><span class="rolling-text">Shop</span></a></li>
+                                    <li><a href="/services"><span class="rolling-text">Services</span> </a></li>
 
-                                    <li><a href="blogs.html"><span class="rolling-text">Blogs</span> </a></li>
-                                    <li><a href="contact.html"><span class="rolling-text">Contact</span></a></li>
+                                    <li><a href="/blogs"><span class="rolling-text">Blogs</span> </a></li>
+                                    <li><a href="/contact"><span class="rolling-text">Contact</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -688,8 +688,8 @@
                         </div>
                         <div class="col col-lg-6 col-12 ">
                             <ul class="right ft-btm ">
-                                <li><a href="privace.html"><span class="rolling-text">Privace & Policy</span> </a></li>
-                                <li><a href="terms.html"><span class="rolling-text">Terms</span></a></li>
+                                <li><a href="#"><span class="rolling-text">Privace & Policy</span> </a></li>
+                                <li><a href="#"><span class="rolling-text">Terms</span></a></li>
                                 <li><a href="/about"><span class="rolling-text">About us</span></a></li>
                                 <% if (user) { %>
                                     <li><a href="#"><span class="rolling-text">Logout</span></a></li>
@@ -735,10 +735,10 @@
     </div>
 
     <!-- Enquiry Button -->
-    <a href="contact.html"> <button class="enquiry-btn">Enquiry</button></a>
+    <a href="/contact"> <button class="enquiry-btn">Enquiry</button></a>
     <!-- Mobile Bottom Navbar -->
     <nav class="mb_navbar_container">
-        <a href="index.html" class="mb_navbar_item ">
+        <a href="/" class="mb_navbar_item ">
             <div class="mb_navbar_icon_wrapper">
                 <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -748,7 +748,7 @@
             <span class="mb_navbar_label">Home</span>
         </a>
 
-        <a href="shop.html" class="mb_navbar_item mb_navbar_active">
+        <a href="/shop" class="mb_navbar_item mb_navbar_active">
             <div class="mb_navbar_icon_wrapper">
                 <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <rect x="2" y="3" width="20" height="18" rx="2" ry="2"></rect>
@@ -783,14 +783,14 @@
             <span class="mb_navbar_label">Cart</span>
         </a>
         <% if (user) { %>
-            <a href="/profile" class="mb_navbar_item">
+            <a href="/user-logout" class="mb_navbar_item">
                 <div class="mb_navbar_icon_wrapper">
                     <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </div>
-                <span class="mb_navbar_label">Profile</span>
+                <span class="mb_navbar_label">Logout</span>
             </a>
             <% } else { %>
                 <a href="/user-login" class="mb_navbar_item">
@@ -803,8 +803,6 @@
                     <span class="mb_navbar_label">Login</span>
                 </a>
                 <% } %>
-
-    
     </nav>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
