@@ -3537,7 +3537,7 @@ img {
   .wpo-hero-slider {
     height: 60vh;
     display: block;
-    padding: 300px 0 400px;
+   
   }
 }
 @media (max-width: 575px) {
@@ -25840,6 +25840,7 @@ font-size: 12px!important;
 
 
 }
+
 .abt-img img{
   height: 700px!important;
 }
@@ -25851,6 +25852,9 @@ font-size: 12px!important;
   .abt-text{
     font-size: 45px!important;
   }
+  .about-wrap{
+  margin-top: 4rem;
+}    
 }
 .xanthic_mercantile_cuboid {
   width: 240px;
@@ -26440,4 +26444,111 @@ text-align: start!important;
   li.gpslocation {
       display: none;
   }
+  .about_heading {
+    font-size: 50px!important;
+  }
+  .about_text {
+    font-size: 17px;
+  }
+}
+@media (max-width: 672px) {
+  .about_wrapper {
+    flex-direction: column-reverse;
+  }
+
+}
+.about_container {
+margin-top: 3rem!important;
+display: flex!important;
+justify-content: center!important;
+align-items: center!important;
+}
+
+.about_wrapper {
+  display: flex!important;
+  justify-content: center!important;
+  flex-wrap: wrap-reverse!important;  
+  gap: 40px;
+  margin: auto;
+}
+
+.about_image_container {
+  flex: 1;
+  min-width: 300px;
+  margin-top: 5rem;
+  max-width: 600px;
+
+}
+
+.about_image {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about_content {
+  flex: 1;
+  min-width: 300px;
+  margin-top: 5rem;
+}
+
+.about_heading {
+  font-size: 76px;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.about_subheading {
+  font-size: 18px;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.about_text {
+  margin-bottom: 25px;
+  font-size: 20px;
+color: black;
+
+}
+
+.about_button {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.about_button:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .about_wrapper {
+      flex-direction: column-reverse;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .about_image_container, .about_content {
+      width: 100%;
+  }
+  .about_content {
+    margin-top: 7px!important;
+    
+  }
+  .about_image_container{
+    margin-top: 1rem!important;
+  }
+  .about_heading{
+    margin-top: 2rem;
+    font-size: 50px;
+  }
+  
 }
