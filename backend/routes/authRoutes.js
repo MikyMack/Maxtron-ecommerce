@@ -15,4 +15,9 @@ router.post('/user-logout', authController.userLogout);
 router.post("/forgot-password", authController.forgotPassword);
 router.post("/reset-password", authController.resetPassword);
 
+router.get('/user-reset-password', (req, res) => {
+    const { email } = req.query;
+    res.render('resetPassword', { email });
+});
+
 module.exports = router;

@@ -20,6 +20,7 @@
     <link href="/css/jquery.fancybox.css" rel="stylesheet">
     <link href="/css/odometer-theme-default.css" rel="stylesheet">
     <link href="/sass/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -86,6 +87,54 @@
                                 <p class="subText">already have an account? <a href="/user-login">Login Now</a></p>
                             </div>
                         </form>
+                        <script>
+                            document.querySelector('.wpo-accountWrapper').addEventListener('submit', async function(event) {
+                                event.preventDefault(); // Prevent the default form submission
+                    
+                                const formData = new FormData(this);
+                                const email = formData.get('email');
+                                const otp = formData.get('otp');
+                    
+                                try {
+                                    const response = await fetch('/api/auth/verify-otp', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({ email, otp }),
+                                    });
+                    
+                                    if (response.ok) {
+                                        // Redirect to the login page on success
+                                        window.location.href = '/user-login';
+                                    } else {
+                                        // Handle error response
+                                        const result = await response.json();
+                                        const errorMessage = result.message || 'An error occurred';
+                                        // Display error message using Toastify
+                                        Toastify({
+                                            text: errorMessage,
+                                            duration: 3000,
+                                            close: true,
+                                            gravity: "top", // `top` or `bottom`
+                                            position: "center", // `left`, `center` or `right`
+                                            backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                                        }).showToast();
+                                    }
+                                } catch (error) {
+                                    Toastify({
+                                        text: 'An error occurred while verifying OTP',
+                                        duration: 3000,
+                                        close: true,
+                                        gravity: "top",
+                                        position: "center",
+                                        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                                        stopOnFocus: true,
+                                    }).showToast();
+                                }
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -110,6 +159,7 @@
     <!--===== Custom script for this template =====-->
     <script src="/js/script.js"></script>
     <script src="/js/gsap-script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>
