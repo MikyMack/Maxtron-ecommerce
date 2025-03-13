@@ -155,7 +155,7 @@
                                             <div class="header-user-form">
                                                 <ul>
                                                     <% if (!isGuest) { %>
-                                                        <li><a href="#" id="logout-btn">Logout</a></li>
+                                                        <li><a href="/api/auth/user-logout">Logout</a></li>
                                                         <li><a href="/orders">Orders</a></li>
                                                         <li><a href="/contact">Contact Us</a></li>
                                                     <% } else { %>
@@ -490,12 +490,12 @@
                                     <h3>Quick Link</h3>
                                 </div>
                                 <ul>
-                                    <li><a href="about.html"><span class="rolling-text">About Us</span> </a></li>
-                                    <li><a href="shop.html"><span class="rolling-text">Shop</span></a></li>
-                                    <li><a href="services.html"><span class="rolling-text">Services</span> </a></li>
+                                    <li><a href="/about"><span class="rolling-text">About Us</span> </a></li>
+                                    <li><a href="/shop"><span class="rolling-text">Shop</span></a></li>
+                                    <li><a href="/services"><span class="rolling-text">Services</span> </a></li>
 
-                                    <li><a href="blogs.html"><span class="rolling-text">Blogs</span> </a></li>
-                                    <li><a href="contact.html"><span class="rolling-text">Contact</span></a></li>
+                                    <li><a href="/blogs"><span class="rolling-text">Blogs</span> </a></li>
+                                    <li><a href="/contact"><span class="rolling-text">Contact</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -512,10 +512,14 @@
                         </div>
                         <div class="col col-lg-6 col-12 ">
                             <ul class="right ft-btm ">
-                                <li><a href="privacy.html"><span class="rolling-text">Privace & Policy</span> </a></li>
-                                <li><a href="terms.html"><span class="rolling-text">Terms</span></a></li>
-                                <li><a href="about.html"><span class="rolling-text">About us</span></a></li>
-                                <li><a href="login.html"><span class="rolling-text">Login</span></a></li>
+                                <li><a href="#"><span class="rolling-text">Privace & Policy</span> </a></li>
+                                <li><a href="#"><span class="rolling-text">Terms</span></a></li>
+                                <li><a href="/about"><span class="rolling-text">About us</span></a></li>
+                                <% if (!isGuest) { %>
+                                    <li><a href="/api/auth/user-logout"><span class="rolling-text">Logout</span></a></li>
+                                <% } else { %>
+                                    <li><a href="/user-login"><span class="rolling-text">Login</span></a></li>
+                                <% } %>
                             </ul>
                         </div>
                     </div>
@@ -572,44 +576,31 @@
             <span class="mb_navbar_label">Cart</span>
         </a>
 
-        <a href="/user-login" class="mb_navbar_item">
-            <div class="mb_navbar_icon_wrapper">
-                <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-            </div>
-            <span class="mb_navbar_label">Login</span>
-        </a>
+        <% if (!isGuest) { %>
+            <a href="/api/auth/user-logout" class="mb_navbar_item">
+                <div class="mb_navbar_icon_wrapper">
+                    <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <span class="mb_navbar_label">Logout</span>
+            </a>
+        <% } else { %>
+            <a href="/user-login" class="mb_navbar_item">
+                <div class="mb_navbar_icon_wrapper">
+                    <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <span class="mb_navbar_label">Login</span>
+            </a>
+        <% } %>
 
 
     </nav>
     <!--===== end page-wrapper =====-->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const logoutBtn = document.querySelector("a#logout-btn");
-
-            if (logoutBtn) {
-                logoutBtn.addEventListener("click", function (event) {
-                    event.preventDefault(); // Prevent default link action
-
-                    fetch("/api/auth/user-logout", {
-                        method: "POST", // Change to POST if needed
-                        credentials: "include" // Ensure cookies are sent
-                    })
-                        .then(response => {
-                            if (response.ok) {
-                                window.location.href = "/cart"; // Redirect after logout
-                            } else {
-                                console.error("Logout failed");
-                            }
-                        })
-                        .catch(error => console.error("Error:", error));
-                });
-            }
-        });
-
-    </script>
     <!--===== All JavaScript files =====-->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>

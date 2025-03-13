@@ -692,7 +692,7 @@
                                 <li><a href="#"><span class="rolling-text">Terms</span></a></li>
                                 <li><a href="/about"><span class="rolling-text">About us</span></a></li>
                                 <% if (user) { %>
-                                    <li><a href="#"><span class="rolling-text">Logout</span></a></li>
+                                    <li><a href="/api/auth/user-logout"><span class="rolling-text">Logout</span></a></li>
                                     <% } else { %>
                                         <li><a href="/user-login"><span class="rolling-text"
                                                     id="logout-btn">Login</span></a></li>
@@ -783,7 +783,7 @@
             <span class="mb_navbar_label">Cart</span>
         </a>
         <% if (user) { %>
-            <a href="/user-logout" class="mb_navbar_item">
+            <a href="/api/auth/user-logout" class="mb_navbar_item">
                 <div class="mb_navbar_icon_wrapper">
                     <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -804,31 +804,7 @@
                 </a>
                 <% } %>
     </nav>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const logoutBtn = document.querySelector("a#logout-btn");
-
-            if (logoutBtn) {
-                logoutBtn.addEventListener("click", function (event) {
-                    event.preventDefault(); // Prevent default link action
-
-                    fetch("/api/auth/user-logout", {
-                        method: "POST", // Change to POST if needed
-                        credentials: "include" // Ensure cookies are sent
-                    })
-                        .then(response => {
-                            if (response.ok) {
-                                window.location.href = "/shop"; // Redirect after logout
-                            } else {
-                                console.error("Logout failed");
-                            }
-                        })
-                        .catch(error => console.error("Error:", error));
-                });
-            }
-        });
-
-    </script>
+   
     <!--===== end page-wrapper =====-->
 
     <!--===== All JavaScript files =====-->
