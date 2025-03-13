@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+
 <head>
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
@@ -26,9 +27,9 @@
     <link rel="stylesheet" href="admin-icon/style.css">
 
     <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" href="img/retticlogo.png">
-    <link rel="apple-touch-icon-precomposed" href="img/retticlogo.png">
-
+    <link rel="shortcut icon" href="/images/max-logo.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/max-logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body class="body">
@@ -38,7 +39,7 @@
         <!-- #page -->
         <div id="page" class="">
             <!-- layout-wrap -->
-           <div class="layout-wrap loader-off">
+            <div class="layout-wrap loader-off">
                 <!-- preload -->
                 <div id="preload" class="preload-container">
                     <div class="preloading">
@@ -135,7 +136,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                 
+
                                     <li class="menu-item has-children">
                                         <a href="javascript:void(0);" class="menu-item-button active">
                                             <div class="icon"><i class="fa fa-users"></i></div>
@@ -211,7 +212,8 @@
                         <div class="wrap">
                             <div class="header-left">
                                 <a href="/dashboard">
-                                    <img style="width: 50px;" id="logo_header_mobile" alt="" src="img/logo.png" data-light="img/logo.png" data-dark="img/logo.png" >
+                                    <img style="width: 50px;" id="logo_header_mobile" alt="" src="/images/max-logo.png"
+                                        data-light="/images/max-logo.png" data-dark="/images/max-logo.png">
                                 </a>
                                 <div class="button-show-hide">
                                     <i class="icon-chevron-left"></i>
@@ -221,8 +223,8 @@
                                 <div class="header-item button-dark-light">
                                     <i class="icon-moon"></i>
                                 </div>
-                              
-                            
+
+
                                 <div class="header-item button-zoom-maximize">
                                     <div class="">
                                         <i class="icon-maximize"></i>
@@ -230,7 +232,8 @@
                                 </div>
                                 <div class="popup-wrap user type-header">
                                     <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
                                                 <span class="image">
                                                     <img src="admin-images/avatar/user-1.png" alt="">
@@ -241,8 +244,9 @@
                                                 </span>
                                             </span>
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end has-content" aria-labelledby="dropdownMenuButton3" >
-                                          
+                                        <ul class="dropdown-menu dropdown-menu-end has-content"
+                                            aria-labelledby="dropdownMenuButton3">
+
                                             <li>
                                                 <a href="#" class="user-item">
                                                     <div class="icon">
@@ -267,6 +271,7 @@
                     </div>
                     <!-- /header-dashboard -->
                     <!-- main-content -->
+
                     <div class="main-content">
                         <!-- main-content-wrap -->
                         <div class="main-content-inner">
@@ -276,13 +281,17 @@
                                     <h3>Users Management</h3>
                                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                                         <li>
-                                            <a href="/dashboard"><div class="text-tiny">Dashboard</div></a>
+                                            <a href="/dashboard">
+                                                <div class="text-tiny">Dashboard</div>
+                                            </a>
                                         </li>
                                         <li>
                                             <i class="icon-chevron-right"></i>
                                         </li>
                                         <li>
-                                            <a href="#"><div class="text-tiny">Users management</div></a>
+                                            <a href="#">
+                                                <div class="text-tiny">Users management</div>
+                                            </a>
                                         </li>
                                         <li>
                                             <i class="icon-chevron-right"></i>
@@ -297,13 +306,13 @@
                                     <div class="wg-table table-all-category">
                                         <ul class="table-title flex gap20 mb-14">
                                             <li>
-                                                <div class="body-title">User Image</div>
-                                            </li>    
-                                            <li>
                                                 <div class="body-title">Name</div>
-                                            </li>    
+                                            </li>
                                             <li>
-                                                <div class="body-title">Email</div>
+                                                <div class="body-title-2">Email</div>
+                                            </li>
+                                            <li>
+                                                <div class="body-title">Mobile No</div>
                                             </li>
                                             <li>
                                                 <div class="body-title">Role</div>
@@ -316,35 +325,61 @@
                                             </li>
                                         </ul>
                                         <ul class="flex flex-column">
-                                            <% users.forEach(user => { %>
-                                            <li class="wg-product item-row gap20">
-                                                <div class="name">
-                                                    <div class="image">
-                                                        <img src="<%= user.image || 'default-avatar.png' %>" alt="<%= user.name %>">
+                                            <% users.forEach(user=> { %>
+                                                <li class="wg-product item-row gap20">
+                                                    <div class="body-text text-main-dark mt-4">
+                                                        <%= user.name %>
                                                     </div>
-                                                </div>
-                                                <div class="body-text text-main-dark mt-4"><%= user.name %></div>
-                                                <div class="body-text text-main-dark mt-4"><%= user.email %></div>
-                                                <div class="body-text text-main-dark mt-4"><%= user.isAdmin ? 'Admin' : 'User' %></div>
-                                                <div class="body-text text-main-dark mt-4"><%= user.blocked ? 'Blocked' : 'Active' %></div>
-                                                <div class="list-icon-function">
-                                                    <div class="item block">
-                                                        <% if (!user.blocked) { %>
-                                                            <a href="/admin-block-user/<%= user._id %>"><i class="icon-ban"></i></a>
-                                                        <% } else { %>
-                                                            <span class="text-muted">Blocked</span>
-                                                        <% } %>
+                                                    <div class="body-text text-main-dark mt-4">
+                                                        <%= user.email %>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <% }); %>
+                                                    <div class="body-text text-main-dark mt-4">
+                                                        <%= user.mobile %>
+                                                    </div>
+                                                    <div class="body-text text-main-dark mt-4">
+                                                        <%= user.isAdmin ? 'Admin' : 'User' %>
+                                                    </div>
+                                                    <div class="body-text text-main-dark mt-4">
+                                                        <%= user.blocked ? 'Blocked' : 'Active' %>
+                                                    </div>
+                                                    <div class="list-icon-function">
+                                                        <div class="item block">
+                                                            <% if (!user.blocked) { %>
+                                                                <button class="btn btn-warning"
+                                                                    onclick="blockUser('<%= user._id %>')">Block</button>
+                                                                <% } else { %>
+                                                                    <button class="btn btn-success"
+                                                                        onclick="unblockUser('<%= user._id %>')">Unblock</button>
+                                                                    <% } %>
+                                                        </div>
+                                                        <div class="item admin">
+                                                            <% if (!user.isAdmin) { %>
+                                                                <button class="btn btn-primary"
+                                                                    onclick="makeAdmin('<%= user._id %>')">Make
+                                                                    Admin</button>
+                                                                <% } else { %>
+                                                                    <button class="btn btn-danger"
+                                                                        onclick="removeAdmin('<%= user._id %>')">Remove
+                                                                        Admin</button>
+                                                                    <% } %>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <% }); %>
                                         </ul>
                                     </div>
                                     <div class="divider"></div>
                                     <div class="flex items-center justify-between flex-wrap gap10">
-                                        <div class="text-tiny">Showing <%= users.length %> entries</div>                           
+                                        <div class="text-tiny">Showing <%= users.length %> entries</div>
+                                        <button class="btn btn-primary" onclick="downloadUserList('csv')">Download as
+                                            CSV</button>
+                                        <button class="btn btn-primary" onclick="downloadUserList('pdf')">Download as
+                                            PDF</button>
                                     </div>
                                 </div>
+
+
+                              
                                 <!-- /all-category -->
                             </div>
                             <!-- /main-content-wrap -->
@@ -352,10 +387,122 @@
                         <!-- /main-content-wrap -->
                         <!-- bottom-page -->
                         <div class="bottom-page">
-                            <div class="body-text">Copyright © 2025 <a href="https://trivlogic.com">Trivlogic</a>. Design by Trivlogic All rights reserved</div>
+                            <div class="body-text">Copyright © 2025 <a href="https://trivlogic.com">Trivlogic</a>.
+                                Design by Trivlogic All rights reserved</div>
                         </div>
                         <!-- /bottom-page -->
                     </div>
+                    <script>
+                        function downloadUserList(format) {
+                            // Send a request to the server to generate the document
+                            fetch(`/download-user-list?format=${format}`, {
+                                method: 'GET',
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        return response.blob();
+                                    } else {
+                                        throw new Error('Failed to download user list');
+                                    }
+                                })
+                                .then(blob => {
+                                    // Create a download link for the file
+                                    const url = window.URL.createObjectURL(blob);
+                                    const a = document.createElement('a');
+                                    a.href = url;
+                                    a.download = `user-list.${format}`; // Set the file name
+                                    document.body.appendChild(a);
+                                    a.click(); // Trigger the download
+                                    document.body.removeChild(a);
+                                    window.URL.revokeObjectURL(url); // Clean up
+                                })
+                                .catch(error => {
+                                    console.error('Error downloading user list:', error);
+                                    alert('Failed to download user list');
+                                });
+                        }
+                    </script>
+                    <script>
+                        // Toggle Client
+                        // Function to handle admin actions (make admin, remove admin, block, unblock)
+                        async function handleAdminAction(url, successMessage) {
+                            try {
+                                const response = await fetch(url, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                });
+
+                                const result = await response.json();
+
+                                if (response.ok && result.success) {
+                                    // Display success message
+                                    Toastify({
+                                        text: result.message || successMessage,
+                                        duration: 3000,
+                                        close: true,
+                                        gravity: "top",
+                                        position: "center",
+                                        style: {
+                                            background: "linear-gradient(to right, #00b09b, #96c93d)",
+                                        },
+                                        stopOnFocus: true,
+                                    }).showToast();
+
+                                    // Reload the page after a delay
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 3000);
+                                } else {
+                                    // Display error message
+                                    Toastify({
+                                        text: result.message || 'An error occurred',
+                                        duration: 3000,
+                                        close: true,
+                                        gravity: "top",
+                                        position: "center",
+                                        style: {
+                                            background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                                        },
+                                        stopOnFocus: true,
+                                    }).showToast();
+                                }
+                            } catch (error) {
+                                Toastify({
+                                    text: 'An error occurred while performing the action',
+                                    duration: 3000,
+                                    close: true,
+                                    gravity: "top",
+                                    position: "center",
+                                    style: {
+                                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                                    },
+                                    stopOnFocus: true,
+                                }).showToast();
+                            }
+                        }
+
+                        // Make a user admin
+                        function makeAdmin(userId) {
+                            handleAdminAction(`/admin-make-admin/${userId}`, 'User is now an admin.');
+                        }
+
+                        // Remove admin role from a user
+                        function removeAdmin(userId) {
+                            handleAdminAction(`/admin-remove-admin/${userId}`, 'User is no longer an admin.');
+                        }
+
+                        // Block a user
+                        function blockUser(userId) {
+                            handleAdminAction(`/admin-block-user/${userId}`, 'User has been blocked.');
+                        }
+
+                        // Unblock a user
+                        function unblockUser(userId) {
+                            handleAdminAction(`/admin-unblock-user/${userId}`, 'User has been unblocked.');
+                        }
+                    </script>
                     <!-- /main-content -->
                 </div>
                 <!-- /section-content-right -->
@@ -365,62 +512,7 @@
         <!-- /#page -->
     </div>
     <!-- /#wrapper -->
-    <script>
-        // Toggle Client
-        function toggleClient(clientId, element) {
-            const icon = element.querySelector('i');
 
-            fetch(`/clients/toggle/${clientId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.client) {
-                    icon.classList.toggle('fa-toggle-on', data.client.toggled);
-                    icon.classList.toggle('fa-toggle-off', !data.client.toggled);
-                } else {
-                    alert('Client not found');
-                }
-            })
-            .catch(error => {
-                console.error('Error toggling client:', error);
-                alert('An error occurred while toggling the client');
-            });
-        }
-
-        function deleteClient(clientId) {
-    if (confirm('Are you sure you want to delete this client?')) {
-        fetch(`/clients/delete/${clientId}`, {
-            method: 'DELETE'
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                return response.json().then(data => {
-                    throw new Error(data.message || 'Client not found');
-                });
-            }
-        })
-        .then(data => {
-            if (data.message === 'Client deleted successfully!') {  // Checking for the success message
-                alert('Client deleted successfully');
-                location.reload();
-            } else {
-                alert('Failed to delete client: ' + (data.message || 'Unknown error'));
-            }
-        })
-        .catch(error => {
-            console.error('Error deleting client:', error);
-            alert('An error occurred while deleting the client: ' + error.message);
-        });
-    }
-}
-
-    </script>
 
     <!-- Javascript -->
     <script src="admin-js/jquery.min.js"></script>
@@ -430,7 +522,7 @@
     <script src="admin-js/switcher.js"></script>
     <script defer src="admin-js/theme-settings.js"></script>
     <script defer src="admin-js/main.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>
