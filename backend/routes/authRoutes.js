@@ -11,7 +11,7 @@ router.post('/user-register', authController.userRegister);
 router.post('/verify-otp', authController.verifyOTP);
 router.post('/verify-otp-password', authController.verifyOTPpassword);
 router.post('/user-login', authController.userLogin);
-router.post('/user-logout', authController.userLogout);
+router.get('/user-logout', authController.userLogout);
 router.post("/forgot-password", authController.forgotPassword);
 router.post("/reset-password", authController.resetPassword);
 

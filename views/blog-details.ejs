@@ -159,7 +159,7 @@
                                             <div class="header-user-form">
                                                 <ul>
                                                     <% if (user) { %>
-                                                        <li><a href="#" id="logout-btn">Logout</a></li>
+                                                        <li><a href="/api/auth/user-logout">Logout</a></li>
                                                         <li><a href="/orders">Orders</a></li>
                                                         <li><a href="/contact">Contact Us</a></li>
                                                         <% } else { %>
@@ -364,7 +364,7 @@
                                 <li><a href="#"><span class="rolling-text">Terms</span></a></li>
                                 <li><a href="/about"><span class="rolling-text">About us</span></a></li>
                                 <% if (user) { %>
-                                    <li><a href="#"><span class="rolling-text">Logout</span></a></li>
+                                    <li><a href="/api/auth/user-logout"><span class="rolling-text">Logout</span></a></li>
                                     <% } else { %>
                                         <li><a href="/user-login"><span class="rolling-text"
                                                     id="logout-btn">Login</span></a></li>
@@ -456,7 +456,7 @@
             <span class="mb_navbar_label">Cart</span>
         </a>
         <% if (user) { %>
-            <a href="/user-logout" class="mb_navbar_item">
+            <a href="/api/auth/user-logout" class="mb_navbar_item">
                 <div class="mb_navbar_icon_wrapper">
                     <svg class="mb_navbar_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
