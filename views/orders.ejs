@@ -186,13 +186,13 @@
             <div class="page-header">
                 <h1 class="order-page-title">My Orders</h1>
                 <div class="filter-wrapper">
-                    <button class="filter-button selected">All Orders</button>
-                    <button class="filter-button">Current Orders</button>
+                    <button class="filter-button selected" id="current-orders-btn">Current Orders</button>
+                    <button class="filter-button" id="order-history-btn">Order History</button>
                 </div>
             </div>
             
-            <div class="main-layout">
-                <div class="content-block">
+            <div class="">
+                <div class="content-block" id="current-orders-section">
                     <div class="block-heading">
                         <h2 class="block-name">🚚 Current Orders</h2>
                         <span class="count-pill count-pill-dark"><%= currentOrders.length %> orders</span>
@@ -202,11 +202,13 @@
                         <div class="order-item">
                             <div class="order-top">
                                 <span class="order-number">#<%= order._id %></span>
-                                <span class="order-phase "><%= order.status %></span>
+                                <span class="order-phase"><%= order.status %></span>
                             </div>
                             <div class="order-info">
                                 <div class="order-date"><%= new Date(order.createdAt).toLocaleDateString() %></div>
                                 <div class="order-amount">Total: <span>₹<%= order.totalAmount %></span></div>
+                                <div class="order-payment-method">Payment Method: <span><%= order.paymentMethod === 'COD' ? 'Cash on Delivery' : 'Paid Online' %></span></div>
+                                <div class="order-address">Delivery Address: <span><%= order.deliveryAddress.address %>, <%= order.deliveryAddress.city %>, <%= order.deliveryAddress.state %>, <%= order.deliveryAddress.zipCode %>, <%= order.deliveryAddress.country %></span></div>
                             </div>
                             <div class="delivery-tracker">
                                 <div class="tracker-stages">
@@ -216,7 +218,7 @@
                                     <div class="tracker-dot <%= order.status === 'Delivered' ? 'tracker-dot-complete' : '' %>"></div>
                                 </div>
                                 <div class="tracker-labels">
-                                    <span class="tracker-label track">Ordered</span>
+                                    <span class="tracker-label <%= order.status === 'Pending' ? 'tracker-label-active' : '' %>">Pending</span>
                                     <span class="tracker-label <%= order.status === 'Processing' ? 'tracker-label-active' : '' %>">Processing</span>
                                     <span class="tracker-label <%= order.status === 'Shipped' ? 'tracker-label-active' : '' %>">Shipped</span>
                                     <span class="tracker-label <%= order.status === 'Delivered' ? 'tracker-label-active' : '' %>">Delivered</span>
@@ -224,15 +226,22 @@
                             </div>
                             <div class="order-products">
                                 <% order.items.forEach(item => { %>
-                                <div class="product-icon"><img src="<%= item.product.images[0] %>" alt="<%= item.product.title %>"></div>
+                                <div class="product-details">
+                                    <div class="product-icon"><img src="<%= item.product.images[0] %>" alt="<%= item.product.title %>"></div>
+                                    <div class="product-info">
+                                        <div class="product-title"><%= item.product.title %></div>
+                                       
+                                    </div>
+                                </div>
                                 <% }) %>
+                              
                                 <% if (order.items.length > 2) { %>
                                 <div class="product-icon more-products">+<%= order.items.length - 2 %></div>
                                 <% } %>
                             </div>
                             <div class="order-controls">
-                                <button class="action-button button-secondary">Track Order</button>
-                                <a href="/product-details/<%= order.items[0].product._id %>"> <button class="action-button button-primary">View Details</button></a>
+                               <button class="action-button button-secondary">Track Order</button>
+                               <a href="/product-details/<%= order.items[0].product._id %>"> <button class="action-button button-primary">View Details</button></a>
                             </div>
                         </div>
                         <% }) %>
@@ -255,7 +264,7 @@
                     </div>
                 </div>
                 
-                <div class="content-block">
+                <div class="content-block" id="order-history-section" style="display: none;">
                     <div class="block-heading">
                         <h2 class="block-name">📦 Order History</h2>
                         <span class="count-pill count-pill-medium"><%= completedOrders.length %> orders</span>
@@ -270,10 +279,20 @@
                             <div class="order-info">
                                 <div class="order-date"><%= new Date(order.createdAt).toLocaleDateString() %></div>
                                 <div class="order-amount">Total: <span>₹<%= order.totalAmount %></span></div>
+                                <div class="order-payment-method">Payment Method: <span><%= order.paymentMethod === 'COD' ? 'Cash on Delivery' : 'Paid Online' %></span></div>
+                                <div class="order-address">Delivery Address: <span><%= order.deliveryAddress.address %>, <%= order.deliveryAddress.city %>, <%= order.deliveryAddress.state %>, <%= order.deliveryAddress.zipCode %>, <%= order.deliveryAddress.country %></span></div>
                             </div>
                             <div class="order-products">
                                 <% order.items.forEach(item => { %>
-                                <div class="product-icon"><img src="<%= item.product.images[0] %>" alt="<%= item.product.title %>"></div>
+                                <div class="product-details">
+                                    <div class="product-icon"><img src="<%= item.product.images[0] %>" alt="<%= item.product.title %>"></div>
+                                    <div class="product-info">
+                                        <div class="product-title"><%= item.product.title %></div>
+                                        <div class="product-measurements">Length: <%= item.length %> cm, Width: <%= item.width %> cm</div>
+                                        <div class="product-price">Price: ₹<%= item.price %></div>
+                                        <div class="product-quantity">Quantity: <%= item.quantity %></div>
+                                    </div>
+                                </div>
                                 <% }) %>
                             </div>
                             <div class="order-controls">
@@ -286,6 +305,21 @@
                 </div>
             </div>
          </section>
+         <script>
+            document.getElementById('current-orders-btn').addEventListener('click', function() {
+                document.getElementById('current-orders-section').style.display = 'block';
+                document.getElementById('order-history-section').style.display = 'none';
+                this.classList.add('selected');
+                document.getElementById('order-history-btn').classList.remove('selected');
+            });
+
+            document.getElementById('order-history-btn').addEventListener('click', function() {
+                document.getElementById('current-orders-section').style.display = 'none';
+                document.getElementById('order-history-section').style.display = 'block';
+                this.classList.add('selected');
+                document.getElementById('current-orders-btn').classList.remove('selected');
+            });
+        </script>
 
 
         <!--===== start wpo-site-footer-section =====-->

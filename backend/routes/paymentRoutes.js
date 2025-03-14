@@ -21,7 +21,7 @@ router.post("/checkoutApi", async (req, res) => {
                 paymentMethod,
                 deliveryAddress,
                 orderNotes,
-                status: "Processing", // COD orders are marked as Processing
+                status: "Processing", 
             });
 
             await order.save();
@@ -63,10 +63,7 @@ router.get("/payu/success", async (req, res) => {
     try {
         const { txnid, mihpayid, status } = req.query;
 
-        // Verify the payment status
         if (status === "success") {
-            // Fetch the order details from the session or database using txnid
-            // For simplicity, let's assume the order details are stored in the session
             const orderDetails = req.session.orderDetails;
 
             if (!orderDetails) {
@@ -82,7 +79,7 @@ router.get("/payu/success", async (req, res) => {
                 paymentMethod: "Online",
                 deliveryAddress: orderDetails.deliveryAddress,
                 orderNotes: orderDetails.orderNotes,
-                status: "Processing", // Mark as Processing after successful payment
+                status: "Processing", 
             });
 
             await order.save();
