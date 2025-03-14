@@ -756,16 +756,16 @@
         function showError(error) {
             switch(error.code) {
                 case error.PERMISSION_DENIED:
-                    document.getElementById("locationLink").innerHTML = "User denied the request for Geolocation.";
+                    document.getElementById("locationLink").innerHTML = "Enable GPS";
                     break;
                 case error.POSITION_UNAVAILABLE:
-                    document.getElementById("locationLink").innerHTML = "Location information is unavailable.";
+                    document.getElementById("locationLink").innerHTML = "unavailable.";
                     break;
                 case error.TIMEOUT:
-                    document.getElementById("locationLink").innerHTML = "The request to get user location timed out.";
+                    document.getElementById("locationLink").innerHTML = "Timed out.";
                     break;
                 case error.UNKNOWN_ERROR:
-                    document.getElementById("locationLink").innerHTML = "An unknown error occurred.";
+                    document.getElementById("locationLink").innerHTML = "Location.";
                     break;
             }
         }
@@ -777,7 +777,6 @@
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); // Log the API response for debugging
                     if (data.address) {
                         const city = data.address.city || data.address.town || data.address.village || "Location";
                         document.getElementById("locationLink").innerHTML = `${city}`;

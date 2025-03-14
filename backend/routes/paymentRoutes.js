@@ -47,7 +47,8 @@ router.post("/checkoutApi", async (req, res) => {
             service_provider: "payu_paisa",
         };
 
-        res.json({ payuData });
+        console.log("Generated PayU Data:", payuData); // Debugging
+        res.json({ success: true, payuData });
 
     } catch (error) {
         console.error("Checkout error:", error);
@@ -56,12 +57,27 @@ router.post("/checkoutApi", async (req, res) => {
 });
 
 
-// PayU Success and Failure Callbacks
-router.post("/payu/success", (req, res) => {
+
+// // PayU Success and Failure Callbacks
+// router.post("/payu/success", (req, res) => {
+//     res.send("Payment Successful!");
+// });
+
+// router.post("/payu/failure", (req, res) => {
+//     res.send("Payment Failed!");
+// });
+
+router.get("/payu/success", (req, res) => {
+    const mihpayid = req.query.mihpayid;
+    const token = req.query.token;
+    console.log("Payment Success:", { mihpayid, token });
     res.send("Payment Successful!");
 });
 
-router.post("/payu/failure", (req, res) => {
+router.get("/payu/failure", (req, res) => {
+    const mihpayid = req.query.mihpayid;
+    const token = req.query.token;
+    console.log("Payment Failed:", { mihpayid, token });
     res.send("Payment Failed!");
 });
 
