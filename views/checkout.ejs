@@ -73,12 +73,12 @@
                                         <a href="/orders">
                                             My Orders
                                         </a>
-                                    <% } else { %>
-                                        <a href="/user-login">
-                                            Login
-                                            <span>Now</span>
-                                        </a>
-                                    <% } %>
+                                        <% } else { %>
+                                            <a href="/user-login">
+                                                Login
+                                                <span>Now</span>
+                                            </a>
+                                            <% } %>
                                 </li>
                             </ul>
                         </div>
@@ -117,7 +117,8 @@
                                             <ul class="dropdown-menu">
                                                 <li><a href="/polyBagProduction">Poly Bag Production & Supply</a></li>
                                                 <li><a href="/consumablesSupplies">Consumables supplies</a></li>
-                                                <li><a href="/transportation">Bio Medial Waste Transportation Services</a></li>
+                                                <li><a href="/transportation">Bio Medial Waste Transportation
+                                                        Services</a></li>
                                                 <li><a href="/bioWasteHandling">Bio Medical waste handling services</a>
                                                 </li>
 
@@ -354,7 +355,7 @@
                                                     <%= item.productId.title %> X <%= item.quantity %><span>₹ <%=
                                                                     (item.selectedMeasurement.offerPrice ||
                                                                     item.selectedMeasurement.price) * item.quantity %>
-                                                                    </span>
+                                                            </span>
                                                 </li>
                                                 <% }) %>
                                                     <li class="s-total">Sub Total<span>₹ <%= totalAmount %></span></li>
@@ -541,7 +542,8 @@
                                 <li><a href="#"><span class="rolling-text">Terms</span></a></li>
                                 <li><a href="/about"><span class="rolling-text">About us</span></a></li>
                                 <% if (user) { %>
-                                    <li><a href="/api/auth/user-logout"><span class="rolling-text">Logout</span></a></li>
+                                    <li><a href="/api/auth/user-logout"><span class="rolling-text">Logout</span></a>
+                                    </li>
                                     <% } else { %>
                                         <li><a href="/user-login"><span class="rolling-text"
                                                     id="logout-btn">Login</span></a></li>
@@ -553,14 +555,14 @@
             </div>
         </footer>
         <div class="floating-buttons">
-            <a target='_blank'  href="mailto:maxtronassociateskerala@gmail.com" class="email-btn">
+            <a target='_blank' href="mailto:maxtronassociateskerala@gmail.com" class="email-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="16" rx="2" ry="2" />
                     <path d="M3 6l9 6 9-6" />
                 </svg>
             </a>
-            <a target='_blank'  href="https://wa.me/9745147000" class="whatsapp-btn">
+            <a target='_blank' href="https://wa.me/9745147000" class="whatsapp-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path
@@ -572,7 +574,7 @@
                 </svg>
 
             </a>
-            <a target='_blank'  href="tel:+919745147000" class="phone-btn">
+            <a target='_blank' href="tel:+919745147000" class="phone-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path
@@ -647,7 +649,7 @@
     </nav>
 
     <!--===== end page-wrapper =====-->
- 
+
 
     <!--===== All JavaScript files =====-->
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

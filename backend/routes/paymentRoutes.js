@@ -11,24 +11,26 @@ router.post("/checkoutApi", async (req, res) => {
     try {
         const { userId, items, totalAmount, billingAddress, paymentMethod, orderNotes, deliveryAddress } = req.body;
 
-        const order = new Order({
-            user: userId,
-            items,
-            totalAmount,
-            billingAddress,
-            paymentMethod,
-            deliveryAddress,
-            orderNotes,
-            status: paymentMethod === "COD" ? "Processing" : "Pending",
-        });
-
-        await order.save();
-
         if (paymentMethod === "COD") {
+            // For COD, save the order immediately
+            const order = new Order({
+                user: userId,
+                items,
+                totalAmount,
+                billingAddress,
+                paymentMethod,
+                deliveryAddress,
+                orderNotes,
+                status: "Processing", // COD orders are marked as Processing
+            });
+
+            await order.save();
             await Cart.deleteOne({ userId: userId });
+
             return res.json({ success: true, message: "Order placed successfully and cart deleted!" });
         }
 
+        // For Online payment, generate payuData and send it to the frontend
         const txnid = "txn" + Date.now();
         const hashString = `${process.env.PAYU_MERCHANT_KEY}|${txnid}|${totalAmount}|Product Purchase|${billingAddress.fullName}|${billingAddress.email}|||||||||||${process.env.PAYU_MERCHANT_SALT}`;
 
@@ -57,28 +59,56 @@ router.post("/checkoutApi", async (req, res) => {
 });
 
 
+router.get("/payu/success", async (req, res) => {
+    try {
+        const { txnid, mihpayid, status } = req.query;
 
-// // PayU Success and Failure Callbacks
-// router.post("/payu/success", (req, res) => {
-//     res.send("Payment Successful!");
-// });
+        // Verify the payment status
+        if (status === "success") {
+            // Fetch the order details from the session or database using txnid
+            // For simplicity, let's assume the order details are stored in the session
+            const orderDetails = req.session.orderDetails;
 
-// router.post("/payu/failure", (req, res) => {
-//     res.send("Payment Failed!");
-// });
+            if (!orderDetails) {
+                return res.status(400).send("Order details not found.");
+            }
 
-router.get("/payu/success", (req, res) => {
-    const mihpayid = req.query.mihpayid;
-    const token = req.query.token;
-    console.log("Payment Success:", { mihpayid, token });
-    res.send("Payment Successful!");
+            // Save the order
+            const order = new Order({
+                user: orderDetails.userId,
+                items: orderDetails.items,
+                totalAmount: orderDetails.totalAmount,
+                billingAddress: orderDetails.billingAddress,
+                paymentMethod: "Online",
+                deliveryAddress: orderDetails.deliveryAddress,
+                orderNotes: orderDetails.orderNotes,
+                status: "Processing", // Mark as Processing after successful payment
+            });
+
+            await order.save();
+            await Cart.deleteOne({ userId: orderDetails.userId });
+
+            console.log("Order saved successfully:", order);
+
+            // Render the success page
+            res.render("success", {
+                txnid: txnid, // Pass the transaction ID to the template
+                order: order // Pass the order details to the template
+            });
+        } else {
+            res.status(400).send("Payment failed. Order not placed.");
+        }
+    } catch (error) {
+        console.error("Error in /payu/success:", error);
+        res.status(500).send("An error occurred while processing your payment.");
+    }
 });
-
 router.get("/payu/failure", (req, res) => {
-    const mihpayid = req.query.mihpayid;
-    const token = req.query.token;
-    console.log("Payment Failed:", { mihpayid, token });
-    res.send("Payment Failed!");
+    const { txnid, mihpayid, status } = req.query;
+    console.log("Payment Failed:", { txnid, mihpayid, status });
+
+    // Render the failure page
+    res.render("failure");
 });
 
 module.exports = router;
