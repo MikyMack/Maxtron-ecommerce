@@ -272,7 +272,34 @@
                                                 });
                                         }
                                     }
-        
+                                    async function cleanGuestCart() {
+    let guestCart = JSON.parse(localStorage.getItem("guestCart")) || [];
+
+    if (guestCart.length === 0) return;
+
+    try {
+        // Fetch all available products from the backend
+        const response = await fetch('/products/all'); // Create an API endpoint to fetch all active product IDs
+        const data = await response.json();
+
+        if (!data.success) return;
+
+        const validProductIds = new Set(data.products.map(product => product._id));
+
+        // Filter out products that no longer exist
+        guestCart = guestCart.filter(item => validProductIds.has(item.productId));
+
+        // Update local storage
+        localStorage.setItem("guestCart", JSON.stringify(guestCart));
+
+    } catch (error) {
+        console.error("Error cleaning guest cart:", error);
+    }
+}
+
+// Call the function when cart page loads
+cleanGuestCart();
+
                                     // Function to remove item from cart (for both guest and logged-in users)
                                     function removeFromCart(productId) {
                                         if (isGuest) {

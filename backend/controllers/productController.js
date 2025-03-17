@@ -325,6 +325,15 @@ exports.listProducts = async (req, res) => {
         res.status(500).json({ message: 'Error fetching products' });
     }
 };
+exports.getAllProducts = async (req, res) => {
+    try {
+        const products = await Product.find({}, '_id'); // Fetch only product IDs
+        res.json({ success: true, products });
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        res.status(500).json({ success: false, message: "Server error" });
+    }
+};
 
 
 exports.addToCart = async (req, res) => {
