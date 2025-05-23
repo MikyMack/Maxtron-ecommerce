@@ -478,4 +478,8 @@ router.get('/product-details/:id', async (req, res) => {
     }
 });
 
+router.post("/payu/failure", (req, res) => {
+    res.render("failure");
+});
+
 module.exports = router;

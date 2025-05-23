@@ -255,8 +255,22 @@
                         </div>
                         <div class="stats-row">
                             <span>Estimated Delivery:</span>
-                            <span>March 7-10, 2025</span>
+                            <span id="delivery-date"></span>
                         </div>
+                        
+                        <script>
+                            const deliveryDateEl = document.getElementById("delivery-date");
+                        
+                            const today = new Date();
+                            const deliveryDate = new Date();
+                            deliveryDate.setDate(today.getDate() + 3);
+                        
+                            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                            const formattedDeliveryDate = deliveryDate.toLocaleDateString('en-US', options);
+                        
+                            deliveryDateEl.textContent = formattedDeliveryDate;
+                        </script>
+                        
                         <div class="stats-row">
                             <span>Total Amount:</span>
                             <span>₹<%= currentOrders.reduce((total, order) => total + order.totalAmount, 0) %></span>
