@@ -31,6 +31,7 @@ router.put('/products/edit/:id', upload.array('productsImages', 4), productContr
 router.delete('/products/delete/:id', productController.deleteProduct);   // Delete a Product
 router.put('/products/toggle/:id', productController.toggleProduct);      // Toggle a Product (Enable/Disable)
 router.get('/products', productController.listProducts);    
+router.get('/products/all', productController.getAllProducts);    
 router.put('/products/edit-review/:productId/:reviewIndex', productController.editReview);              // List all Products
 
 

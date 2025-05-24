@@ -1,6 +1,8 @@
 // controllers/authController.js
 const User = require('../models/User'); 
 const Cart  = require('../models/Cart'); 
+const Product = require("../models/Product");
+
 const sendEmail = require('../utils/nodemailer');
 const otpGenerator = require('otp-generator');
 const jwt = require('jsonwebtoken');
@@ -17,7 +19,6 @@ exports.userLogin = async (req, res) => {
             return res.status(400).json({ message: 'Email and password are required!' });
         }
 
-        // Parse guestCart from JSON string to JavaScript array
         let parsedGuestCart = [];
         if (guestCart) {
             try {
@@ -33,10 +34,9 @@ exports.userLogin = async (req, res) => {
             return res.status(400).json({ message: 'User not found!' });
         }
 
-        // Compare passwords
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Incorrect Password or Mail !' });
+            return res.status(400).json({ message: 'Incorrect Password or Mail!' });
         }
 
         if (user.blocked) return res.status(403).json({ message: 'User is blocked!' });
@@ -44,12 +44,19 @@ exports.userLogin = async (req, res) => {
         // Fetch the user's cart from the database
         let userCart = await Cart.findOne({ userId: user._id });
 
-        // If guestCart is provided, merge it with the user's cart
-        if (parsedGuestCart && parsedGuestCart.length > 0) {
+        if (parsedGuestCart.length > 0) {
             if (!userCart) {
-                // If the user doesn't have a cart, create one
                 userCart = new Cart({ userId: user._id, items: [] });
             }
+
+            // Fetch valid product IDs from DB
+            const guestProductIds = parsedGuestCart.map(item => item.productId);
+            const existingProducts = await Product.find({ _id: { $in: guestProductIds } });
+
+            const existingProductIds = new Set(existingProducts.map(p => p._id.toString()));
+
+            // Remove deleted products
+            parsedGuestCart = parsedGuestCart.filter(item => existingProductIds.has(item.productId));
 
             // Merge guest cart into user's cart
             parsedGuestCart.forEach(guestItem => {
@@ -58,10 +65,8 @@ exports.userLogin = async (req, res) => {
                 );
 
                 if (existingItemIndex > -1) {
-                    // If the product already exists in the user's cart, update the quantity
                     userCart.items[existingItemIndex].quantity += guestItem.quantity;
                 } else {
-                    // If the product doesn't exist, add it to the user's cart
                     userCart.items.push({
                         productId: guestItem.productId,
                         title: guestItem.title,
@@ -71,23 +76,20 @@ exports.userLogin = async (req, res) => {
                 }
             });
 
-            // Save the updated cart to the database
             await userCart.save();
         }
 
-        // Generate JWT token
         const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.SESSION_SECRET, { expiresIn: '7d' });
 
-        // Set the token in a cookie
         res.cookie('token', token, { httpOnly: true, secure: false, maxAge: 7 * 24 * 60 * 60 * 1000 });
 
-        // Send success response
         res.status(200).json({ success: true, message: 'Login successful!' });
     } catch (error) {
         console.log("Error in Login:", error.message);
         res.status(500).json({ message: error.message });
     }
 };
+
 
 
 exports.login = async (req, res) => {
