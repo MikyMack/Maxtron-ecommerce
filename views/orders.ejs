@@ -197,6 +197,17 @@
                         <h2 class="block-name">🚚 Current Orders</h2>
                         <span class="count-pill count-pill-dark"><%= currentOrders.length %> orders</span>
                     </div>
+                   <% if (currentOrders.length === 0) { %>
+        <!-- Empty State -->
+        <div class="empty-orders-state">
+            <div class="empty-orders-image"></div>
+            <h3 class="empty-orders-title">No Orders Yet</h3>
+            <p class="empty-orders-text">
+                You haven't placed any orders yet. Start shopping to see your orders here!
+            </p>
+            <a href="/shop" class="shop-now-button">Start Shopping</a>
+        </div>
+    <% }  else { %>
                     <div class="order-container">
                         <% currentOrders.forEach(order => { %>
                         <div class="order-item">
@@ -241,7 +252,7 @@
                             </div>
                             <div class="order-controls">
                                <button class="action-button button-secondary">Track Order</button>
-                               <a href="/product-details/<%= order.items[0].product._id %>"> <button class="action-button button-primary">View Details</button></a>
+                               <a href="/product-details/<%= order.items[0].product._id %>"> <button  class="action-button button-primary">View Details</button></a>
                             </div>
                         </div>
                         <% }) %>
@@ -276,6 +287,7 @@
                             <span>₹<%= currentOrders.reduce((total, order) => total + order.totalAmount, 0) %></span>
                         </div>
                     </div>
+                       <% } %>
                 </div>
                 
                 <div class="content-block" id="order-history-section" style="display: none;">
@@ -283,6 +295,16 @@
                         <h2 class="block-name">📦 Order History</h2>
                         <span class="count-pill count-pill-medium"><%= completedOrders.length %> orders</span>
                     </div>
+                       <% if (completedOrders.length === 0) { %>
+                             <div class="empty-history-state">
+            <div class="empty-history-image"></div>
+            <h3 class="empty-history-title">No Order History</h3>
+            <p class="empty-history-text">
+                You haven't completed any orders yet. Start shopping to build your order history!
+            </p>
+            <a href="/shop" class="history-shop-button">Browse Products</a>
+        </div>
+    <% } else { %>
                     <div class="order-container">
                         <% completedOrders.forEach(order => { %>
                         <div class="order-item">
@@ -311,11 +333,12 @@
                             </div>
                             <div class="order-controls">
                                <a href="/shop"><button class="action-button button-secondary">Buy Again</button></a> 
-                               <a href="/product-details/<%= order._id %>"> <button class="action-button button-secondary">View Details</button></a>
+                               <a href="/product-details/<%= order._id %>"> <button  class="action-button button-secondary">View Details</button></a>
                             </div>
                         </div>
                         <% }) %>
                     </div>
+                        <% } %>
                 </div>
             </div>
          </section>
