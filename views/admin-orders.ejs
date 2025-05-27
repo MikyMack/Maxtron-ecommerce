@@ -3,7 +3,7 @@
 <head>
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
-    <title>Rettic - Admin Testimonials</title>
+    <title>Maxtron - Admin Testimonials</title>
 
     <meta name="author" content="trivlogic.com">
 
@@ -28,7 +28,710 @@
     <!-- Favicon and Touch Icons  -->
     <link rel="shortcut icon" href="/images/max-logo.png">
     <link rel="apple-touch-icon-precomposed" href="/images/max-logo.png">
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+     .main-content {
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .main-content-inner {
+            width: 100%!important;
+            margin: 0 auto;
+        }
+
+        .main-content-wrap {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        /* Header Section */
+        .flex.items-center.flex-wrap.justify-between.gap20.mb-30 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fe7a39 0%, #fe7a39 100%);
+            color: white;
+            margin-bottom: 0 !important;
+        }
+
+        h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            color: white;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .breadcrumbs a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumbs a:hover {
+            color: white;
+        }
+
+        .breadcrumbs .text-tiny {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .breadcrumbs .icon-chevron-right::before {
+            content: "›";
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Table Styles */
+        .wg-box {
+            background: white;
+        }
+
+        .wg-table {
+            width: 100%;
+        }
+
+        .table-title {
+            display: flex;
+            list-style: none;
+            background: #f8fafc;
+            padding: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-title li {
+            flex: 1;
+            padding: 0 10px;
+        }
+
+        .table-title li:nth-child(1) { flex: 2; } /* Order ID */
+        .table-title li:nth-child(2) { flex: 1.5; } /* User */
+        .table-title li:nth-child(3) { flex: 1; } /* Amount */
+        .table-title li:nth-child(4) { flex: 1; } /* Status */
+        .table-title li:nth-child(5) { flex: 1; } /* Action */
+
+        .flex.flex-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wg-product.item-row {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.2s ease;
+        }
+
+        .wg-product.item-row:hover {
+            background-color: #f8fafc;
+            transform: translateX(4px);
+        }
+
+        .wg-product.item-row:last-child {
+            border-bottom: none;
+        }
+
+        .wg-product.item-row > div {
+            flex: 1;
+            padding: 0 10px;
+        }
+
+        .wg-product.item-row > div:nth-child(1) { flex: 2; } /* Order ID */
+        .wg-product.item-row > div:nth-child(2) { flex: 1.5; } /* User */
+        .wg-product.item-row > div:nth-child(3) { flex: 1; } /* Amount */
+        .wg-product.item-row > div:nth-child(4) { flex: 1; } /* Status */
+        .wg-product.item-row > div:nth-child(5) { flex: 1; } /* Action */
+
+        .body-text {
+            font-weight: 500;
+            color: #2d3748;
+            font-size: 14px;
+        }
+
+        .text-main-dark {
+            color: #2d3748 !important;
+        }
+
+        /* Order ID Styling */
+        .wg-product.item-row > div:first-child .body-text {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 12px;
+            background: #e2e8f0;
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: #4a5568;
+            display: inline-block;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Amount Styling */
+        .wg-product.item-row > div:nth-child(3) .body-text {
+            font-weight: 600;
+            color: #059669;
+            font-size: 16px;
+        }
+
+        /* Status Styling */
+        .wg-product.item-row > div:nth-child(4) .body-text {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* Status Colors */
+        .wg-product.item-row > div:nth-child(4) .body-text {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        /* Action Buttons */
+        .list-icon-function {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .item.edit .edit-btn,
+        .item.update-status > div {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .item.edit .edit-btn {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .item.edit .edit-btn:hover {
+            background: #2563eb;
+            transform: scale(1.1);
+        }
+
+        .item.update-status > div {
+            background: #10b981;
+            color: white;
+            cursor: pointer;
+        }
+
+        .item.update-status > div:hover {
+            background: #059669;
+            transform: scale(1.1);
+        }
+
+        .icon-edit-3::before {
+            content: "✏️";
+        }
+
+        .icon-refresh::before {
+            content: "🔄";
+        }
+
+        /* Footer */
+        .divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 0;
+        }
+
+        .flex.items-center.justify-between.flex-wrap.gap10 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+            background: #f8fafc;
+        }
+
+        .text-tiny {
+            color: #718096;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Bottom Page */
+        .bottom-page {
+            text-align: center;
+            padding: 30px;
+            color: #718096;
+            font-size: 13px;
+        }
+
+        .bottom-page a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .bottom-page a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .flex.items-center.flex-wrap.justify-between.gap20.mb-30 {
+                padding: 20px;
+            }
+
+            h3 {
+                font-size: 24px;
+            }
+
+            .table-title,
+            .wg-product.item-row {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 10px;
+            }
+
+            .flex.items-center.flex-wrap.justify-between.gap20.mb-30 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .breadcrumbs {
+                align-self: stretch;
+                justify-content: center;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            /* Hide table header on mobile */
+            .table-title {
+                display: none!important;
+            }
+
+            /* Convert table rows to cards */
+            .wg-product.item-row {
+                flex-direction: column;
+                align-items: stretch;
+                background: white;
+                margin-bottom: 15px;
+                border-radius: 12px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+                border: 1px solid #e2e8f0;
+                padding: 20px;
+            }
+
+            .wg-product.item-row:hover {
+                transform: none;
+            }
+
+            .wg-product.item-row > div {
+                flex: none;
+                padding: 8px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #f1f5f9;
+            }
+
+            .wg-product.item-row > div:last-child {
+                border-bottom: none;
+                justify-content: center;
+                padding-top: 15px;
+            }
+
+            /* Add labels for mobile */
+            .wg-product.item-row > div::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #4a5568;
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                flex-shrink: 0;
+                min-width: 100px;
+            }
+
+            .wg-product.item-row > div:nth-child(1)::before {
+                content: "Order ID";
+            }
+
+            .wg-product.item-row > div:nth-child(2)::before {
+                content: "User";
+            }
+
+            .wg-product.item-row > div:nth-child(3)::before {
+                content: "Amount";
+            }
+
+            .wg-product.item-row > div:nth-child(4)::before {
+                content: "Status";
+            }
+
+            .wg-product.item-row > div:nth-child(5)::before {
+                content: "Actions";
+            }
+
+            /* Adjust order ID for mobile */
+            .wg-product.item-row > div:first-child .body-text {
+                max-width: none;
+                font-size: 11px;
+            }
+
+            .list-icon-function {
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 5px;
+            }
+
+            .flex.items-center.flex-wrap.justify-between.gap20.mb-30 {
+                padding: 15px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            .wg-product.item-row {
+                padding: 15px;
+                margin-bottom: 10px;
+            }
+
+            .wg-product.item-row > div::before {
+                min-width: 80px;
+                font-size: 11px;
+            }
+
+            .body-text {
+                font-size: 13px;
+            }
+
+            .wg-product.item-row > div:first-child .body-text {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+        }
+
+        /* Utility Classes */
+        .gap20 { gap: 20px; }
+        .gap10 { gap: 10px; }
+        .mb-30 { margin-bottom: 30px; }
+        .mb-14 { margin-bottom: 14px; }
+        .mt-4 { margin-top: 4px; }
+
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-start { justify-content: flex-start; }
+        .flex-wrap { flex-wrap: wrap; }
+        .flex-column { flex-direction: column; }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .item.edit {
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        .edit-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .edit-btn:hover {
+            background: #0056b3;
+        }
+
+        .icon-edit-3::before {
+            content: "✏️";
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        @keyframes slideIn {
+            from { 
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            padding: 20px 24px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .close:hover {
+            background-color: #f0f0f0;
+        }
+
+        .modal-body {
+            padding: 0 24px 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        .order-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+
+        .order-info h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .order-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .order-details div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .order-details strong {
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 10px;
+            }
+            
+            .order-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body class="body">
@@ -50,7 +753,7 @@
                 <div class="section-menu-left">
                     <div class="box-logo">
                         <a href="/dashboard" id="site-logo-inner">
-                            <img style="width:60px;" id="logo_header" alt="rettic" src="/images/max-logo.png"
+                            <img style="width:60px;" id="logo_header" alt="Maxtron" src="/images/max-logo.png"
                                 data-light="/images/max-logo.png" data-dark="/images/max-logo.png">
                         </a>
                         <div class="button-show-hide">
@@ -110,7 +813,7 @@
                                             </li> -->
                                         </ul>
                                     </li>
-                                    <li class="menu-item has-children">
+                                    <!-- <li class="menu-item has-children">
                                         <a href="javascript:void(0);" class="menu-item-button">
                                             <div class="icon">
                                                 <svg width="24" height="22" viewBox="0 0 22 18" fill="none"
@@ -134,7 +837,7 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                  
                                     <li class="menu-item has-children">
                                         <a href="javascript:void(0);" class="menu-item-button">
@@ -276,13 +979,13 @@
                                     <h3>Order Management</h3>
                                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                                         <li>
-                                            <a href="/dashboard"><div class="text-tiny">Dashboard</div></a>
+                                            <a href="/dashboard"><div style="color: white;" class="text-tiny">Dashboard</div></a>
                                         </li>
                                         <li>
                                             <i class="icon-chevron-right"></i>
                                         </li>
                                         <li>
-                                            <a href="#"><div class="text-tiny">Order Management</div></a>
+                                            <a href="#"><div style="color: white;" class="text-tiny">Order Management</div></a>
                                         </li>
                                         <li>
                                             <i class="icon-chevron-right"></i>
@@ -312,7 +1015,7 @@
                                                 <div class="body-title">Action</div>
                                             </li>
                                         </ul>
-                                        <ul class="flex flex-column" id="order-list">
+                                        <ul class="flex flex-column " id="order-list">
                                             <% orders.forEach(order => { %>
                                                 <li class="wg-product item-row gap20">
                                                     <div class="body-text text-main-dark mt-4"><%= order._id %></div>
@@ -320,9 +1023,12 @@
                                                     <div class="body-text text-main-dark mt-4">$<%= order.totalAmount.toFixed(2) %></div>
                                                     <div class="body-text text-main-dark mt-4"><%= order.status %></div>
                                                     <div class="list-icon-function">
-                                                        <div class="item edit">
-                                                            <a href="/admin-edit-order/<%= order._id %>"><i class="icon-edit-3"></i></a>
-                                                        </div>
+                                                           <div class="item edit">
+            <button class="edit-btn" onclick="openEditModal('64f1a2b3c4d5e6f7g8h9i0j1')">
+                <i class="icon-edit-3"></i>
+          
+            </button>
+        </div>
                                                         <div class="item update-status" onclick="updateOrderStatus('<%= order._id %>')">
                                                             <div><i class="icon-refresh"></i></div>
                                                         </div>
@@ -347,6 +1053,72 @@
                         </div>
                         <!-- /bottom-page -->
                     </div>
+
+                      <!-- Edit Order Modal -->
+    <div id="editOrderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Order</h2>
+                <button class="close" onclick="closeEditModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-info">
+                    <h4>Order Information</h4>
+                    <div class="order-details">
+                        <div>
+                            <strong>Order ID:</strong>
+                            <span id="modalOrderId">-</span>
+                        </div>
+                        <div>
+                            <strong>Customer:</strong>
+                            <span id="modalCustomer">-</span>
+                        </div>
+                        <div>
+                            <strong>Order Date:</strong>
+                            <span id="modalOrderDate">-</span>
+                        </div>
+                        <div>
+                            <strong>Total Amount:</strong>
+                            <span id="modalAmount">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="editOrderForm">
+                    <div class="form-group">
+                        <label class="form-label" for="orderStatus">Order Status</label>
+                        <select class="form-control" id="orderStatus" name="status" required>
+                            <option value="">Select Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="out_for_delivery">Out for Delivery</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                            <option value="returned">Returned</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="deliveryDate">Delivery Date</label>
+                        <input type="date" class="form-control" id="deliveryDate" name="deliveryDate">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="deliveryAddress">Delivery Address</label>
+                        <textarea class="form-control" id="deliveryAddress" name="deliveryAddress" rows="4" placeholder="Enter complete delivery address..."></textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Update Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
                     <script>
                         function updateOrderStatus(id) {
                             const newStatus = prompt('Enter new status (Pending, Processing, Shipped, Delivered, Cancelled):');
@@ -373,6 +1145,132 @@
                             }
                         }
                     </script>
+
+                    <script>
+        // Sample order data (in real app, this would come from your database)
+        const orderData = {
+            '64f1a2b3c4d5e6f7g8h9i0j1': {
+                id: 'ORD-001',
+                customer: 'John Doe',
+                orderDate: '2024-01-15',
+                amount: '$125.99',
+                status: 'processing',
+                deliveryDate: '2024-01-20',
+                deliveryAddress: '123 Main St, City, State, 12345'
+            },
+            '64f1a2b3c4d5e6f7g8h9i0j2': {
+                id: 'ORD-002',
+                customer: 'Jane Smith',
+                orderDate: '2024-01-16',
+                amount: '$89.50',
+                status: 'shipped',
+                deliveryDate: '2024-01-18',
+                deliveryAddress: '456 Oak Ave, City, State, 67890'
+            }
+        };
+
+        let currentOrderId = null;
+
+        function openEditModal(orderId) {
+            currentOrderId = orderId;
+            const order = orderData[orderId];
+            
+            if (order) {
+                // Populate modal with order information
+                document.getElementById('modalOrderId').textContent = order.id;
+                document.getElementById('modalCustomer').textContent = order.customer;
+                document.getElementById('modalOrderDate').textContent = order.orderDate;
+                document.getElementById('modalAmount').textContent = order.amount;
+                
+                // Populate form fields
+                document.getElementById('orderStatus').value = order.status;
+                document.getElementById('deliveryDate').value = order.deliveryDate;
+                document.getElementById('deliveryAddress').value = order.deliveryAddress;
+            }
+            
+            // Show modal
+            const modal = document.getElementById('editOrderModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEditModal() {
+            const modal = document.getElementById('editOrderModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            currentOrderId = null;
+            
+            // Reset form
+            document.getElementById('editOrderForm').reset();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('editOrderModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEditModal();
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('editOrderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const updatedData = {
+                status: formData.get('status'),
+                deliveryDate: formData.get('deliveryDate'),
+                deliveryAddress: formData.get('deliveryAddress')
+            };
+            
+            // Here you would make an AJAX request to update the order
+            console.log('Updating order:', currentOrderId, updatedData);
+            
+            // For demo purposes, update local data
+            if (orderData[currentOrderId]) {
+                orderData[currentOrderId].status = updatedData.status;
+                orderData[currentOrderId].deliveryDate = updatedData.deliveryDate;
+                orderData[currentOrderId].deliveryAddress = updatedData.deliveryAddress;
+            }
+            
+            // Show success message (you can customize this)
+            alert('Order updated successfully!');
+            
+            // Close modal
+            closeEditModal();
+            
+            // In a real application, you would make an API call like this:
+            /*
+            fetch(`/admin-edit-order/${currentOrderId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Order updated successfully!');
+                    closeEditModal();
+                    // Optionally refresh the page or update the UI
+                } else {
+                    alert('Error updating order: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating order');
+            });
+            */
+        });
+
+        // Handle escape key to close modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('editOrderModal').classList.contains('show')) {
+                closeEditModal();
+            }
+        });
+    </script>
                     <!-- /main-content -->
                 </div>
                 <!-- /section-content-right -->
