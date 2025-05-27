@@ -38,11 +38,93 @@ app.get('/admin-banner', authMiddleware, async (req, res) => {
 // Manage banners (Protected Route)
 app.get('/admin-orders', authMiddleware, async (req, res) => {
     try {
-        const orders = await Order.find();
-        res.render('admin-orders', { title: 'Manage Banners', orders }); 
+        // Pagination parameters
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10; // Default 10 items per page
+        
+        // Status filter (optional)
+        const { status } = req.query;
+        const filter = {};
+        if (status) filter.status = status;
+
+        // Calculate skip value
+        const skip = (page - 1) * limit;
+
+        // Get orders with pagination
+        const orders = await Order.find(filter)
+            .populate('user', 'name')
+            .sort({ createdAt: -1 }) // Newest first
+            .skip(skip)
+            .limit(limit);
+
+        // Count total documents (for pagination info)
+        const total = await Order.countDocuments(filter);
+
+        res.render('admin-orders', { 
+            title: 'Manage Orders',
+            orders,
+            currentPage: page,
+            totalPages: Math.ceil(total / limit),
+            limit,
+            totalOrders: total,
+            statusFilter: status || 'all' // Pass current filter status
+        });
+        
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: 'Error retrieving banners' });
+        res.status(500).json({ message: 'Error retrieving orders' });
+    }
+});
+// Get single order
+app.get('/orders/:id', authMiddleware, async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id).populate('user', 'name');
+        if (!order) return res.status(404).json({ message: 'Order not found' });
+        res.json(order);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Error fetching order' });
+    }
+});
+
+// Update order status
+app.put('/orders/update-status/:id', authMiddleware, async (req, res) => {
+    try {
+        const { status } = req.body;
+        if (!['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'].includes(status)) {
+            return res.status(400).json({ message: 'Invalid status' });
+        }
+
+        const order = await Order.findByIdAndUpdate(
+            req.params.id,
+            { status },
+            { new: true }
+        );
+        res.json({ success: true, order });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: 'Error updating status' });
+    }
+});
+
+// Update order details
+app.put('/orders/update/:id', authMiddleware, async (req, res) => {
+    try {
+        const { status, delivery_date } = req.body;
+        const updateData = {};
+        
+        if (status) updateData.status = status;
+        if (delivery_date) updateData.delivery_date = new Date(delivery_date);
+
+        const order = await Order.findByIdAndUpdate(
+            req.params.id,
+            updateData,
+            { new: true }
+        );
+        res.json({ success: true, order });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ success: false, message: 'Error updating order' });
     }
 });
 app.get('/admin-edit-banner/:id', authMiddleware, async (req, res) => {

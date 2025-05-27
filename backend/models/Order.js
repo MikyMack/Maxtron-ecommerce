@@ -30,10 +30,24 @@ const orderSchema = new mongoose.Schema({
         zipCode: String,
         country: String
     },
-    status: { type: String, enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'], default: 'Pending' },
-    paymentMethod: { type: String, enum: ['COD', 'Online'], required: true },
+    status: { 
+        type: String, 
+        enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'], 
+        default: 'Pending' 
+    },
+    paymentMethod: { 
+        type: String, 
+        enum: ['COD', 'Online'], 
+        required: true 
+    },
     orderNotes: { type: String, default: '' },
+    delivery_date: { type: Date },
     createdAt: { type: Date, default: Date.now }
+});
+
+// Virtual for formatted delivery date
+orderSchema.virtual('formattedDeliveryDate').get(function() {
+    return this.delivery_date ? this.delivery_date.toLocaleDateString() : 'Not set';
 });
 
 module.exports = mongoose.model('Order', orderSchema);
