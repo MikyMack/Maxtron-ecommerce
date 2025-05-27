@@ -219,39 +219,50 @@
                             <a href="/shop" class="shop-now-button">Start Shopping</a>
                         </div>
                         <% } else { %>
-                            <div class="order-container">
+                            <div>
                                 <% currentOrders.forEach(order=> { %>
                                     <div class="order-item">
                                         <div class="order-top">
-                                            <span class="order-number">#<%= order._id %></span>
+                                            <span class="order-number">#<%= order._id.toString().slice(-5) %></span>
                                             <span class="order-phase">
                                                 <%= order.status %>
                                             </span>
                                         </div>
                                         <div class="order-info">
-                                            <div class="order-date">
-                                                <%= new Date(order.createdAt).toLocaleDateString() %>
-                                            </div>
-                                            <div class="order-amount">Total: <span>₹<%= order.totalAmount %></span>
-                                            </div>
-                                            <div class="order-payment-method">Payment Method: <span>
-                                                    <%= order.paymentMethod==='COD' ? 'Cash on Delivery' : 'Paid Online' %>
-                                                </span></div>
-                                            <div class="order-address">Delivery Address: <span>
-                                                    <%= order.deliveryAddress.address %>, <%= order.deliveryAddress.city %>, 
-                                                    <%= order.deliveryAddress.state %>, <%= order.deliveryAddress.zipCode %>, 
-                                                    <%= order.deliveryAddress.country %>
-                                                </span></div>
-                                            <div class="estimated-delivery">
-                                                Estimated Delivery: <span>
-                                                    <% if (order.delivery_date) { %>
-                                                        <%= new Date(order.delivery_date).toLocaleDateString('en-US', {
-                                                            year: 'numeric', month: 'long', day: 'numeric' 
-                                                        }) %>
-                                                    <% } else { %>
-                                                        Not set
-                                                    <% } %>
-                                                </span>
+                                            <div class="order-info-grid">
+                                                <div class="order-info-item">
+                                                    <div class="order-date">
+                                                        Order Date: <%= new Date(order.createdAt).toLocaleDateString() %>
+                                                    </div>
+                                                </div>
+                                                <div class="order-info-item">
+                                                    <div class="order-amount">Total: <span>₹<%= order.totalAmount %></span></div>
+                                                </div>
+                                                <div class="order-info-item">
+                                                    <div class="order-payment-method">Payment Method: <span>
+                                                        <%= order.paymentMethod==='COD' ? 'Cash on Delivery' : 'Paid Online' %>
+                                                    </span></div>
+                                                </div>
+                                                <div class="order-info-item full-width">
+                                                    <div class="order-address">Delivery Address: <span>
+                                                        <%= order.deliveryAddress.address %>, <%= order.deliveryAddress.city %>, 
+                                                        <%= order.deliveryAddress.state %>, <%= order.deliveryAddress.zipCode %>, 
+                                                        <%= order.deliveryAddress.country %>
+                                                    </span></div>
+                                                </div>
+                                                <div class="order-info-item full-width">
+                                                    <div class="estimated-delivery">
+                                                        Estimated Delivery: <span>
+                                                            <% if (order.delivery_date) { %>
+                                                                <%= new Date(order.delivery_date).toLocaleDateString('en-US', {
+                                                                    year: 'numeric', month: 'long', day: 'numeric' 
+                                                                }) %>
+                                                            <% } else { %>
+                                                                Not set
+                                                            <% } %>
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="delivery-tracker">
@@ -347,11 +358,11 @@
                             <a href="/shop" class="history-shop-button">Browse Products</a>
                         </div>
                         <% } else { %>
-                            <div class="order-container">
+                            <div class="">
                                 <% completedOrders.forEach(order=> { %>
                                     <div class="order-item">
                                         <div class="order-top">
-                                            <span class="order-number">#<%= order._id %></span>
+                                            <span class="order-number">#<%= order._id.toString().slice(-5) %></span>
                                             <span class="order-phase phase-complete">Delivered</span>
                                         </div>
                                         <div class="order-info">
