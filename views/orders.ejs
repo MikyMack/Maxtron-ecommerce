@@ -356,7 +356,12 @@
                                         </div>
                                         <div class="order-info">
                                             <div class="order-date">
-                                                <%= new Date(order.createdAt).toLocaleDateString() %>
+                                                Order Date: <%= new Date(order.createdAt).toLocaleDateString() %>
+                                            </div>
+                                            <div class="order-delivery-date">
+                                                Delivered On: <%= new Date(order.delivery_date).toLocaleDateString('en-US', {
+                                                    year: 'numeric', month: 'long', day: 'numeric'
+                                                }) %>
                                             </div>
                                             <div class="order-amount">Total: <span>₹<%= order.totalAmount %></span>
                                             </div>
@@ -380,12 +385,7 @@
                                                         <div class="product-title">
                                                             <%= item.product.title %>
                                                         </div>
-                                                        <div class="product-measurements">Length: <%= item.length %> cm,
-                                                                Width: <%= item.width %> cm</div>
-                                                        <div class="product-price">Price: ₹<%= item.price %>
-                                                        </div>
-                                                        <div class="product-quantity">Quantity: <%= item.quantity %>
-                                                        </div>
+                                                                                                    
                                                     </div>
                                                 </div>
                                                 <% }) %>
